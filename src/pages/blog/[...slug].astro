@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const categoryNames: Record<string, string> = {
+  'brand-story': 'Brand Story',
+  'ingredient': 'Ingredient',
+  'beauty-lab': 'Beauty Lab',
+  'jeju-life': 'Jeju Life',
+  'notice': 'Notice',
+};
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <div class="article-header">
+      <span class="article-category-tag">
+        {categoryNames[post.data.category] || post.data.category}
+      </span>
+      <h1>{post.data.title}</h1>
+      <div class="article-meta">
+        <span>{post.data.author}</span>
+        <time>
+          {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </div>
+    </div>
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
