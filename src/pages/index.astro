@@ -1,17 +1,47 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categoryNames: Record<string, string> = {
+  'brand-story': 'Brand Story',
+  'ingredient': 'Ingredient',
+  'beauty-lab': 'Beauty Lab',
+  'jeju-life': 'Jeju Life',
+  'notice': 'Notice',
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+  <div class="main-content">
+    <h1 class="page-title">JEJULABS MAGAZINE</h1>
+    <p class="page-desc">제주의 감귤에서 시작된 클린뷰티 이야기</p>
+
+    <div class="post-grid">
+      {posts.map((post) => (
+        <article class="post-card">
+          <a href={`/blog/${post.id}`}>
+            {post.data.thumbnail && (
+              <div class="post-card-thumb">
+                <img src={post.data.thumbnail} alt={post.data.title} />
+              </div>
+            )}
+            <div class="post-card-body">
+              <span class="post-card-category">
+                {categoryNames[post.data.category] || post.data.category}
+              </span>
+              <h2 class="post-card-title">{post.data.title}</h2>
+              <p class="post-card-desc">{post.data.description}</p>
+              <time class="post-card-date">
+                {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
