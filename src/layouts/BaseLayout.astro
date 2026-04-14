@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'JEJULABS MAGAZINE – 제주시트러스랩스 매거진' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} | JEJULABS MAGAZINE</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body>
+  <header id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">JEJULABS</a>
+      <p class="tagline">MAGAZINE BY JEJU CITRUS LABS</p>
+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav id="gnb" class="gnb">
+      <ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/category/brand-story">BRAND STORY</a></li>
+        <li><a href="/category/ingredient">INGREDIENT</a></li>
+        <li><a href="/category/beauty-lab">BEAUTY LAB</a></li>
+        <li><a href="/category/jeju-life">JEJU LIFE</a></li>
+        <li><a href="/about">ABOUT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">JEJULABS</a>
+      <p class="footer-desc">MAGAZINE BY JEJU CITRUS LABS</p>
+      <div class="footer-links">
+        <a href="https://jejulabs.com" target="_blank">Official</a>
+        <a href="https://instagram.com/jejulabs_official" target="_blank">Instagram</a>
+        <a href="/about">About</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 JEJU CITRUS LABS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="dimmed" class="dimmed"></div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const gnb = document.getElementById('gnb');
+    const dimmed = document.getElementById('dimmed');
+
+    hamburger?.addEventListener('click', () => {
+      hamburger.classList.toggle('on');
+      gnb?.classList.toggle('on');
+      dimmed?.classList.toggle('on');
+    });
+
+    dimmed?.addEventListener('click', () => {
+      hamburger?.classList.remove('on');
+      gnb?.classList.remove('on');
+      dimmed?.classList.remove('on');
+    });
+  </script>
+</body>
+</html>
