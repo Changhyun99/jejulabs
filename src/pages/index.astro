@@ -13,35 +13,104 @@ const categoryNames: Record<string, string> = {
   'jeju-life': 'Jeju Life',
   'notice': 'Notice',
 };
+
+const heroPost = posts[0];
+const restPosts = posts.slice(1);
 ---
 
 <BaseLayout title="Home">
   <div class="main-content">
-    <h1 class="page-title">JEJULABS MAGAZINE</h1>
-    <p class="page-desc">제주의 감귤에서 시작된 클린뷰티 이야기</p>
 
-    <div class="post-grid">
-      {posts.map((post) => (
-        <article class="post-card">
-          <a href={`/blog/${post.id}`}>
-            {post.data.thumbnail && (
-              <div class="post-card-thumb">
-                <img src={post.data.thumbnail} alt={post.data.title} />
-              </div>
-            )}
-            <div class="post-card-body">
-              <span class="post-card-category">
-                {categoryNames[post.data.category] || post.data.category}
-              </span>
-              <h2 class="post-card-title">{post.data.title}</h2>
-              <p class="post-card-desc">{post.data.description}</p>
-              <time class="post-card-date">
-                {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+    {/* HERO POST */}
+    {heroPost && (
+      <article class="hero-post">
+        <a href={`/blog/${heroPost.id}`}>
+          {heroPost.data.thumbnail ? (
+            <div class="hero-post-image">
+              <img src={heroPost.data.thumbnail} alt={heroPost.data.title} />
+            </div>
+          ) : (
+            <div class="hero-post-image-placeholder"></div>
+          )}
+          <div class="hero-post-overlay">
+            <span class="hero-post-category">
+              {categoryNames[heroPost.data.category] || heroPost.data.category}
+            </span>
+            <h2 class="hero-post-title">{heroPost.data.title}</h2>
+            <p class="hero-post-desc">{heroPost.data.description}</p>
+            <div class="hero-post-meta">
+              <span class="hero-post-author">{heroPost.data.author}</span>
+              <time>
+                {heroPost.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ')}
               </time>
             </div>
-          </a>
-        </article>
-      ))}
+          </div>
+        </a>
+      </article>
+    )}
+
+    {/* POST LIST */}
+    <div class="post-list">
+      {restPosts.map((post, index) => {
+        const isFeature = index > 0 && index % 4 === 3;
+
+        if (isFeature) {
+          return (
+            <article class="feature-post">
+              <a href={`/blog/${post.id}`}>
+                {post.data.thumbnail ? (
+                  <div class="feature-post-image">
+                    <img src={post.data.thumbnail} alt={post.data.title} />
+                  </div>
+                ) : (
+                  <div class="feature-post-image" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); height: 420px;"></div>
+                )}
+                <div class="feature-post-overlay">
+                  <span class="feature-post-category">
+                    {categoryNames[post.data.category] || post.data.category}
+                  </span>
+                  <h2 class="feature-post-title">{post.data.title}</h2>
+                  <p class="feature-post-desc">{post.data.description}</p>
+                  <div class="feature-post-meta">
+                    <span>{post.data.author}</span>
+                    <time>
+                      {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ')}
+                    </time>
+                  </div>
+                </div>
+              </a>
+            </article>
+          );
+        }
+
+        return (
+          <article class="post-item">
+            <a href={`/blog/${post.id}`}>
+              {post.data.thumbnail ? (
+                <div class="post-item-image">
+                  <img src={post.data.thumbnail} alt={post.data.title} />
+                </div>
+              ) : (
+                <div class="post-item-image-placeholder"></div>
+              )}
+              <div class="post-item-body">
+                <span class="post-item-category">
+                  {categoryNames[post.data.category] || post.data.category}
+                </span>
+                <h2 class="post-item-title">{post.data.title}</h2>
+                <p class="post-item-desc">{post.data.description}</p>
+                <div class="post-item-footer">
+                  <span class="post-item-author">{post.data.author}</span>
+                  <time class="post-item-date">
+                    {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ')}
+                  </time>
+                </div>
+              </div>
+            </a>
+          </article>
+        );
+      })}
     </div>
+
   </div>
 </BaseLayout>
