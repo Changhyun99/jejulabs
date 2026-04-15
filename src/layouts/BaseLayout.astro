@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'JEJULABS MAGAZINE – 제주의 감귤에서 시작된 클린뷰티 이야기' } = Astro.props;
+const { title, description = 'JEJULABS MAGAZINE – 본질을 탐구하고, 그것을 재해석합니다' } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ const { title, description = 'JEJULABS MAGAZINE – 제주의 감귤에서 시�
     <div class="header-inner">
       <div class="logo">
         <a href="/">JEJULABS</a>
-        <p class="tagline">MAGAZINE BY JEJU CITRUS LABS</p>
+        <p class="tagline">Left Behind. Loved Again.</p>
       </div>
       <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
         <span></span>
@@ -45,11 +45,17 @@ const { title, description = 'JEJULABS MAGAZINE – 제주의 감귤에서 시�
       <li><a href="/category/beauty-lab">Beauty Lab</a></li>
       <li><a href="/category/jeju-life">Jeju Life</a></li>
     </ul>
-    <p class="gnb-category">Info</p>
+    <p class="gnb-category">Brand</p>
     <ul class="gnb-list">
       <li><a href="/about">About</a></li>
-      <li><a href="https://jejulabs.com" target="_blank" rel="noopener">Official Site</a></li>
+      <li><a href="https://jejucitruslabs.com/brand/" target="_blank" rel="noopener">Product</a></li>
+      <li><a href="https://smartstore.naver.com/jejulabs" target="_blank" rel="noopener">Shop</a></li>
+    </ul>
+    <p class="gnb-category">Connect</p>
+    <ul class="gnb-list">
       <li><a href="https://instagram.com/jejulabs_official" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://blog.naver.com/jeju-labs" target="_blank" rel="noopener">Blog</a></li>
+      <li><a href="mailto:contact@jejulabs.com">Contact</a></li>
     </ul>
   </nav>
 
@@ -65,10 +71,14 @@ const { title, description = 'JEJULABS MAGAZINE – 제주의 감귤에서 시�
   <footer id="footer">
     <div class="footer-inner">
       <div class="footer-logo">JEJULABS</div>
+      <p class="footer-slogan">본질을 탐구하고, 그것을 재해석합니다.</p>
       <div class="footer-links">
-        <a href="https://jejulabs.com" target="_blank" rel="noopener">Official</a>
+        <a href="https://jejucitruslabs.com/brand/" target="_blank" rel="noopener">Product</a>
+        <a href="https://smartstore.naver.com/jejulabs" target="_blank" rel="noopener">Shop</a>
         <a href="https://instagram.com/jejulabs_official" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://blog.naver.com/jeju-labs" target="_blank" rel="noopener">Blog</a>
         <a href="/about">About</a>
+        <a href="mailto:contact@jejulabs.com">Contact</a>
       </div>
       <p class="footer-copy">&copy; 2026 JEJU CITRUS LABS. All rights reserved.</p>
     </div>

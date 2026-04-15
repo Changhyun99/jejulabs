@@ -49,10 +49,11 @@ const restPosts = posts.slice(1);
       </article>
     )}
 
-    {/* POST LIST */}
+    {/* POST LIST - 오렌지/다크 교차 */}
     <div class="post-list">
       {restPosts.map((post, index) => {
         const isFeature = index > 0 && index % 4 === 3;
+        const isOrange = index % 2 === 1;
 
         if (isFeature) {
           return (
@@ -63,7 +64,7 @@ const restPosts = posts.slice(1);
                     <img src={post.data.thumbnail} alt={post.data.title} />
                   </div>
                 ) : (
-                  <div class="feature-post-image" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); height: 420px;"></div>
+                  <div class="feature-post-image-placeholder"></div>
                 )}
                 <div class="feature-post-overlay">
                   <span class="feature-post-category">
@@ -84,7 +85,7 @@ const restPosts = posts.slice(1);
         }
 
         return (
-          <article class="post-item">
+          <article class={`post-item ${isOrange ? 'orange' : ''}`}>
             <a href={`/blog/${post.id}`}>
               {post.data.thumbnail ? (
                 <div class="post-item-image">
