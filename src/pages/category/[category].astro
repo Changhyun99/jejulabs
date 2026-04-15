@@ -2,63 +2,51 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const categoryConfig: Record<string, { name: string; desc: string }> = {
-  'brand-story': {
-    name: 'Brand Story',
-    desc: '제주시트러스랩스와 제주랩스의 여정, 비하인드, 그리고 브랜드 철학을 담은 이야기.'
-  },
-  'ingredient': {
-    name: 'Ingredient',
-    desc: '감귤박, 당근잎, 괭생이모자반까지 — 제주 원료의 본질을 탐구합니다.'
-  },
-  'beauty-lab': {
-    name: 'Beauty Lab',
-    desc: '클린뷰티 트렌드, 스킨케어 루틴, 비건 인증에 대한 깊이 있는 이야기.'
-  },
-  'jeju-life': {
-    name: 'Jeju Life',
-    desc: '제주의 계절, 로컬 크리에이터, 업사이클링 문화를 재해석합니다.'
-  },
-  'notice': {
-    name: 'Notice',
-    desc: '공지사항, 이벤트, 팝업 소식.'
-  },
+const categoryConfig: Record<string, { name: string; description: string }> = {
+  'brand-story': { name: 'Brand Story', description: '제주시트러스랩스의 여정과 철학을 이야기합니다.' },
+  'ingredient': { name: 'Ingredient', description: '제주 원료의 가치를 탐구합니다.' },
+  'beauty-lab': { name: 'Beauty Lab', description: '클린뷰티 트렌드와 스킨케어 인사이트를 나눕니다.' },
+  'jeju-life': { name: 'Jeju Life', description: '제주의 문화, 사람, 그리고 라이프스타일.' },
+  'notice': { name: 'Notice', description: '공지사항과 소식을 전합니다.' },
 };
 
-export async function getStaticPaths() {
-  const categories = ['brand-story', 'ingredient', 'beauty-lab', 'jeju-life', 'notice'];
-  return categories.map(category => ({
+export function getStaticPaths() {
+  return Object.keys(categoryConfig).map(category => ({
     params: { category },
   }));
 }
 
 const { category } = Astro.params;
-const config = categoryConfig[category] || { name: category, desc: '' };
+const config = categoryConfig[category] || { name: category, description: '' };
 
 const posts = (await getCollection('blog'))
   .filter(post => !post.data.draft && post.data.category === category)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
+const categoryNames: Record<string, string> = {
+  'brand-story': 'Brand Story',
+  'ingredient': 'Ingredient',
+  'beauty-lab': 'Beauty Lab',
+  'jeju-life': 'Jeju Life',
+  'notice': 'Notice',
+};
+
 function formatDate(date: Date) {
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ');
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
 ---
 
-<BaseLayout title={config.name}>
-  <div class="main-content">
+<BaseLayout title={config.name} description={config.description}>
+  <div class="category-header">
+    <h1>{config.name}</h1>
+    <p>{config.description}</p>
+  </div>
 
-    <div class="category-header">
-      <h1>{config.name}</h1>
-      <p>{config.desc}</p>
+  {posts.length === 0 ? (
+    <div class="category-empty">
+      <p>아직 이 카테고리에 게시된 글이 없습니다.</p>
     </div>
-
-    {posts.length === 0 && (
-      <div style="padding:80px 48px;text-align:center;">
-        <p style="color:var(--jl-text-muted);font-size:1.1rem;">아직 이 카테고리에 글이 없습니다.</p>
-        <a href="/" class="btn" style="margin-top:24px;">홈으로 돌아가기</a>
-      </div>
-    )}
-
+  ) : (
     <div class="post-list">
       {posts.map((post, index) => {
         const isOrange = index % 2 === 1;
@@ -73,7 +61,9 @@ function formatDate(date: Date) {
                 <div class="post-item-image-placeholder"></div>
               )}
               <div class="post-item-body">
-                <span class="post-item-category">{config.name}</span>
+                <span class="post-item-category">
+                  {categoryNames[post.data.category] || post.data.category}
+                </span>
                 <h2 class="post-item-title">{post.data.title}</h2>
                 <p class="post-item-desc">{post.data.description}</p>
                 <div class="post-item-footer">
@@ -86,6 +76,5 @@ function formatDate(date: Date) {
         );
       })}
     </div>
-
-  </div>
+  )}
 </BaseLayout>

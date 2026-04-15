@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'JEJULABS MAGAZINE – 본질을 탐구하고, 그것을 재해석합니다' } = Astro.props;
+const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그것을 재해석합니다' } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -24,8 +24,9 @@ const { title, description = 'JEJULABS MAGAZINE – 본질을 탐구하고, 그�
   <header id="header">
     <div class="header-inner">
       <div class="logo">
-        <a href="/">JEJULABS</a>
-        <p class="tagline">Left Behind. Loved Again.</p>
+        <a href="/">
+          <img src="/images/jejulabs-logo-txt.svg" alt="제주랩스" class="logo-img" />
+        </a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
         <span></span>

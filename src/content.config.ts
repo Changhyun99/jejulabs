@@ -7,13 +7,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.date(),
-    category: z.enum([
-      'brand-story',
-      'ingredient',
-      'beauty-lab',
-      'jeju-life',
-      'notice'
-    ]),
+    category: z.enum(['brand-story', 'ingredient', 'beauty-lab', 'jeju-life', 'notice']),
     thumbnail: z.string().optional(),
     author: z.string().default('JEJULABS'),
     draft: z.boolean().default(false),

@@ -1,17 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  return posts.map(post => ({
     params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content } = await post.render();
 
 const categoryNames: Record<string, string> = {
   'brand-story': 'Brand Story',
@@ -21,50 +21,39 @@ const categoryNames: Record<string, string> = {
   'notice': 'Notice',
 };
 
-// 관련 글 가져오기
+function formatDate(date: Date) {
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
 const allPosts = (await getCollection('blog'))
   .filter(p => !p.data.draft && p.id !== post.id)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const relatedPosts = allPosts
-  .filter(p => p.data.category === post.data.category)
-  .slice(0, 2);
-
-const fallbackPosts = relatedPosts.length < 2
-  ? allPosts.filter(p => p.data.category !== post.data.category).slice(0, 2 - relatedPosts.length)
-  : [];
-
-const related = [...relatedPosts, ...fallbackPosts];
+const related = allPosts.slice(0, 2);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article>
-    <div class="article-header">
-      <span class="article-category-tag">
-        {categoryNames[post.data.category] || post.data.category}
-      </span>
-      <h1>{post.data.title}</h1>
-      <div class="article-meta">
-        <span>{post.data.author}</span>
-        <time>
-          {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
-      </div>
+  <article class="article-detail">
+    <span class="article-category">
+      {categoryNames[post.data.category] || post.data.category}
+    </span>
+    <h1 class="article-title">{post.data.title}</h1>
+    <div class="article-meta">
+      <span class="author">{post.data.author}</span>
+      <time>{formatDate(post.data.date)}</time>
     </div>
     <div class="article-body">
       <Content />
     </div>
   </article>
 
-  {/* 관련 글 */}
   {related.length > 0 && (
     <div class="related-articles">
-      <h2>관련 글</h2>
+      <h3>다른 이야기도 읽어보세요</h3>
       <div class="related-articles-grid">
         {related.map(r => (
-          <a href={`/blog/${r.id}`} class="related-article-card">
-            <h3>{r.data.title}</h3>
-            <p>{r.data.description}</p>
+          <a href={`/blog/${r.id}`} class="related-article-item">
+            <h4>{r.data.title}</h4>
+            <p>{formatDate(r.data.date)}</p>
           </a>
         ))}
       </div>
