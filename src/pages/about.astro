@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="제주시트러스랩스와 제주랩스에 대하여">
+
+  {/* HERO */}
+  <div class="about-hero">
+    <h1>본질을 탐구하고,<br />그것을 재해석합니다.</h1>
+    <p>
+      제주시트러스랩스는 매년 5만 톤 이상 버려지는 제주 감귤박에서
+      가치를 발견합니다. 독자적인 특허 기술과 그린 케미스트리로
+      버려진 것을 아름다움으로 재해석하는 회사입니다.
+    </p>
+  </div>
+
+  {/* 두 브랜드 */}
+  <div class="about-section">
+    <h2>두 개의 이름, 하나의 철학</h2>
+    <p>
+      <strong style="color:var(--jl-lime);">제주시트러스랩스 (JEJU CITRUS LABS)</strong>는
+      B2B 기업으로서 감귤박 업사이클링 원료 개발, OEM/ODM 서비스,
+      그리고 DIY 교육 프로그램을 운영합니다.
+      원료 연구부터 완제품 납품까지 원스톱 서비스를 제공합니다.
+    </p>
+    <p>
+      <strong style="color:var(--jl-lime);">제주랩스 (JEJULABS)</strong>는
+      소비자를 위한 라이프스타일 큐레이션 브랜드입니다.
+      "Left Behind. Loved Again." 이라는 슬로건 아래,
+      귤박수 스킨케어 제품과 제주의 본질을 재해석하는 콘텐츠를 만듭니다.
+    </p>
+  </div>
+
+  {/* 핵심 가치 카드 */}
+  <div class="about-cards">
+    <div class="about-card">
+      <h3>업사이클링</h3>
+      <p>버려지는 감귤박을 고부가가치 화장품 원료로 전환합니다.</p>
+    </div>
+    <div class="about-card">
+      <h3>비건 클린뷰티</h3>
+      <p>100% 비건, 자극 지수 0.00. 피부와 지구를 동시에 생각합니다.</p>
+    </div>
+    <div class="about-card">
+      <h3>특허 기술</h3>
+      <p>증류 장치, ZnO 나노 합성, 감귤박 원료 처리 등 3건의 특허를 보유합니다.</p>
+    </div>
+    <div class="about-card">
+      <h3>INCI 글로벌 등재</h3>
+      <p>귤박수 원료 INCI ID 41176. 전 세계 화장품에 활용 가능합니다.</p>
+    </div>
+    <div class="about-card">
+      <h3>제주 로컬</h3>
+      <p>제주산 원료와 제주 농가 협력으로 지역 가치를 창출합니다.</p>
+    </div>
+    <div class="about-card">
+      <h3>콘텐츠 큐레이션</h3>
+      <p>매거진을 통해 제주의 본질을 재해석하고 공유합니다.</p>
+    </div>
+  </div>
+
+  {/* 인용 */}
+  <div class="about-quote">
+    <p>"아무것도 하지 않으면 아무 일도 일어나지 않는다."</p>
+  </div>
+
+  {/* 연혁/원료 */}
+  <div class="about-section">
+    <h2>주요 원료</h2>
+    <p>
+      <strong style="color:var(--jl-lime);">귤박수</strong> — 감귤 착즙 후 감귤박에서 독자 공정으로 추출한 시트러스 워터. INCI ID 41176.
+    </p>
+    <p>
+      <strong style="color:var(--jl-lime);">감귤박 추출물</strong> — Citrus Unshiu Peel Extract. 항산화, 진정 효과.
+    </p>
+    <p>
+      이 외에도 당근잎, 양배추, 괭생이모자반, 구멍갈파래 등
+      제주의 다양한 자연 원료를 연구·활용하고 있습니다.
+    </p>
+  </div>
+
+  {/* CTA */}
+  <div class="about-cta">
+    <h2>함께 만들어가는 이야기</h2>
+    <p>제주시트러스랩스와 협업하거나, 제주랩스의 제품을 경험해보세요.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://smartstore.naver.com/jejulabs" target="_blank" rel="noopener" class="btn">스마트스토어</a>
+      <a href="https://instagram.com/jejulabs_official" target="_blank" rel="noopener" class="btn btn-outline">Instagram</a>
+      <a href="mailto:contact@jejulabs.com" class="btn btn-outline">Contact</a>
+    </div>
+  </div>
+
+</BaseLayout>

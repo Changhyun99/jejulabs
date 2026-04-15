@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Product" description="귤박수 3-STEP 기초 세트 — 제주 감귤박 업사이클링 클린뷰티">
+
+  {/* HERO */}
+  <div class="product-hero">
+    <div class="product-hero-content">
+      <span class="product-hero-label">From Waste to Beauty</span>
+      <h1 class="product-hero-title">귤박수 3-STEP<br />기초 세트</h1>
+      <p class="product-hero-sub">
+        제주 감귤 착즙 후 버려지는 감귤박에서 추출한 시트러스 워터.<br />
+        INCI 국제 등재 원료로 만든 100% 비건 클린뷰티 기초 라인.
+      </p>
+    </div>
+  </div>
+
+  {/* SECTION: 원료 이야기 */}
+  <div class="product-section">
+    <p class="product-section-label">Core Ingredient</p>
+    <h2>귤박수 — 버려진 것에서 찾은 아름다움</h2>
+    <p>
+      매년 제주에서 버려지는 감귤박은 5만 톤 이상입니다.
+      제주시트러스랩스는 독자적인 특허 공정으로 감귤박에서 기능성 시트러스 워터를 추출합니다.
+      90% 이상의 천연 모노테르펜을 함유한 이 원료는 2025년 INCI 국제 등재를 완료하여
+      글로벌 화장품 원료로 활용이 가능합니다.
+    </p>
+    <p>
+      피부 진정과 보습에 탁월한 효과가 입증된 귤박수는,
+      제주랩스 스킨케어 라인의 핵심 원료입니다.
+    </p>
+  </div>
+
+  {/* SECTION: 제품 라인업 */}
+  <div class="product-section" style="border-top:1px solid var(--jl-border);">
+    <p class="product-section-label">Product Lineup</p>
+    <h2>3-STEP 기초 케어</h2>
+    <p>
+      세안부터 보습까지, 귤박수 한 가지 원료 철학으로 관통하는 기초 3종 세트입니다.
+      모든 제품은 100% 비건이며, 피부 자극 지수 0.00을 기록했습니다.
+    </p>
+
+    <div class="product-items">
+      <div class="product-card">
+        <div class="product-card-icon">🫧</div>
+        <h3>페이셜 폼</h3>
+        <p>150ml · BHA 함유<br />감귤박 워터 기반의 저자극 클렌징 폼. 불필요한 유분만 세정하고 피부 장벽은 지킵니다.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">💧</div>
+        <h3>토너</h3>
+        <p>120ml · 나이아신아마이드 + 알란토인<br />감귤박 워터와 티트리 워터를 블렌딩한 진정 토너. 세안 후 즉각적인 수분 공급.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">🌿</div>
+        <h3>로션</h3>
+        <p>120ml · 호호바 + 녹차 + 해바라기 + 마카다미아 오일<br />가볍지만 깊은 보습. 오일 레이어가 수분 증발을 막아줍니다.</p>
+      </div>
+    </div>
+  </div>
+
+  {/* SECTION: 특징 */}
+  <div class="product-section" style="border-top:1px solid var(--jl-border);">
+    <p class="product-section-label">Why JEJULABS</p>
+    <h2>왜 제주랩스인가</h2>
+
+    <div class="product-info-grid">
+      <div class="product-info-item">
+        <h4>100% Vegan</h4>
+        <p>동물성 원료를 사용하지 않으며, 동물 실험을 하지 않습니다.</p>
+      </div>
+      <div class="product-info-item">
+        <h4>자극 지수 0.00</h4>
+        <p>인체 적용 시험에서 피부 자극 지수 0.00을 기록했습니다.</p>
+      </div>
+      <div class="product-info-item">
+        <h4>3건의 특허</h4>
+        <p>증류 장치, ZnO 나노 합성, 감귤박 원료 처리 공정 특허를 보유하고 있습니다.</p>
+      </div>
+      <div class="product-info-item">
+        <h4>INCI 국제 등재</h4>
+        <p>귤박수 원료가 INCI ID 41176으로 글로벌 등재되었습니다.</p>
+      </div>
+      <div class="product-info-item">
+        <h4>제주 로컬</h4>
+        <p>제주산 감귤박만을 사용하며, 지역 농가와 협력합니다.</p>
+      </div>
+      <div class="product-info-item">
+        <h4>친환경 패키징</h4>
+        <p>수성 라벨, 콩기름 인쇄, 재활용 가능한 용기를 사용합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  {/* CTA */}
+  <div class="product-cta-section">
+    <h2>귤박수를 직접 경험해보세요</h2>
+    <p>네이버 스마트스토어에서 구매하거나, 브랜드 페이지에서 더 자세한 정보를 확인하세요.</p>
+    <div class="product-cta-buttons">
+      <a href="https://smartstore.naver.com/jejulabs" target="_blank" rel="noopener" class="btn">스마트스토어에서 구매</a>
+      <a href="https://jejucitruslabs.com/brand/" target="_blank" rel="noopener" class="btn btn-outline">브랜드 페이지</a>
+    </div>
+  </div>
+
+</BaseLayout>
