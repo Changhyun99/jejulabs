@@ -16,6 +16,10 @@ const categoryNames: Record<string, string> = {
 
 const heroPost = posts[0];
 const restPosts = posts.slice(1);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ');
+}
 ---
 
 <BaseLayout title="Home">
@@ -40,20 +44,64 @@ const restPosts = posts.slice(1);
             <p class="hero-post-desc">{heroPost.data.description}</p>
             <div class="hero-post-meta">
               <span class="hero-post-author">{heroPost.data.author}</span>
-              <time>
-                {heroPost.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ')}
-              </time>
+              <time>{formatDate(heroPost.data.date)}</time>
             </div>
           </div>
         </a>
       </article>
     )}
 
-    {/* POST LIST - 오렌지/다크 교차 */}
+    {/* POST LIST */}
     <div class="post-list">
       {restPosts.map((post, index) => {
         const isFeature = index > 0 && index % 4 === 3;
         const isOrange = index % 2 === 1;
+
+        {/* 제품 발견 모듈: 2번째 글 뒤에 삽입 */}
+        if (index === 2) {
+          return (
+            <>
+              <article class={`post-item ${isOrange ? 'orange' : ''}`}>
+                <a href={`/blog/${post.id}`}>
+                  {post.data.thumbnail ? (
+                    <div class="post-item-image">
+                      <img src={post.data.thumbnail} alt={post.data.title} />
+                    </div>
+                  ) : (
+                    <div class="post-item-image-placeholder"></div>
+                  )}
+                  <div class="post-item-body">
+                    <span class="post-item-category">
+                      {categoryNames[post.data.category] || post.data.category}
+                    </span>
+                    <h2 class="post-item-title">{post.data.title}</h2>
+                    <p class="post-item-desc">{post.data.description}</p>
+                    <div class="post-item-footer">
+                      <span class="post-item-author">{post.data.author}</span>
+                      <time class="post-item-date">{formatDate(post.data.date)}</time>
+                    </div>
+                  </div>
+                </a>
+              </article>
+
+              {/* PRODUCT DISCOVERY MODULE */}
+              <div class="product-discover">
+                <div class="product-discover-visual">
+                  <div style="text-align:center;color:rgba(255,255,255,0.5);font-size:3rem;font-weight:900;letter-spacing:-0.03em;">귤박수</div>
+                </div>
+                <div class="product-discover-body">
+                  <span class="product-discover-label">From Waste to Beauty</span>
+                  <h2 class="product-discover-title">귤박수 3-STEP 기초 세트</h2>
+                  <p class="product-discover-desc">
+                    제주 감귤 착즙 후 버려지는 감귤박에서 추출한 시트러스 워터. 
+                    INCI 국제 등재 원료로 만든 100% 비건 클린뷰티 기초 라인을 만나보세요.
+                  </p>
+                  <a href="/product" class="product-discover-cta">자세히 보기</a>
+                </div>
+              </div>
+            </>
+          );
+        }
 
         if (isFeature) {
           return (
@@ -74,9 +122,7 @@ const restPosts = posts.slice(1);
                   <p class="feature-post-desc">{post.data.description}</p>
                   <div class="feature-post-meta">
                     <span>{post.data.author}</span>
-                    <time>
-                      {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ')}
-                    </time>
+                    <time>{formatDate(post.data.date)}</time>
                   </div>
                 </div>
               </a>
@@ -102,15 +148,23 @@ const restPosts = posts.slice(1);
                 <p class="post-item-desc">{post.data.description}</p>
                 <div class="post-item-footer">
                   <span class="post-item-author">{post.data.author}</span>
-                  <time class="post-item-date">
-                    {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ')}
-                  </time>
+                  <time class="post-item-date">{formatDate(post.data.date)}</time>
                 </div>
               </div>
             </a>
           </article>
         );
       })}
+    </div>
+
+    {/* NEWSLETTER CTA */}
+    <div class="newsletter-cta">
+      <h2 class="newsletter-cta-title">제주의 재해석, 매주 받아보세요</h2>
+      <p class="newsletter-cta-desc">JEJULABS MAGAZINE의 새로운 이야기를 이메일로 전해드립니다.</p>
+      <form class="newsletter-cta-form" onsubmit="return false;">
+        <input type="email" placeholder="이메일 주소를 입력하세요" />
+        <button type="submit">구독하기</button>
+      </form>
     </div>
 
   </div>

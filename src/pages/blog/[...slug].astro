@@ -20,6 +20,21 @@ const categoryNames: Record<string, string> = {
   'jeju-life': 'Jeju Life',
   'notice': 'Notice',
 };
+
+// 관련 글 가져오기
+const allPosts = (await getCollection('blog'))
+  .filter(p => !p.data.draft && p.id !== post.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const relatedPosts = allPosts
+  .filter(p => p.data.category === post.data.category)
+  .slice(0, 2);
+
+const fallbackPosts = relatedPosts.length < 2
+  ? allPosts.filter(p => p.data.category !== post.data.category).slice(0, 2 - relatedPosts.length)
+  : [];
+
+const related = [...relatedPosts, ...fallbackPosts];
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
@@ -40,4 +55,19 @@ const categoryNames: Record<string, string> = {
       <Content />
     </div>
   </article>
+
+  {/* 관련 글 */}
+  {related.length > 0 && (
+    <div class="related-articles">
+      <h2>관련 글</h2>
+      <div class="related-articles-grid">
+        {related.map(r => (
+          <a href={`/blog/${r.id}`} class="related-article-card">
+            <h3>{r.data.title}</h3>
+            <p>{r.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 </BaseLayout>
