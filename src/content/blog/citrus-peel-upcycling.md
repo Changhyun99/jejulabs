@@ -3,7 +3,7 @@ title: "감귤박 업사이클링, 버려지는 자원의 재발견"
 description: "매년 제주에서 20만 톤 이상 버려지는 감귤박. 우리는 이 자원에서 새로운 가능성을 찾았습니다."
 date: 2026-04-12
 category: "ingredient"
-thumbnail: ""
+thumbnail: "/images/blog/citrus-peel-upcycling.jpg"
 author: "JEJULABS"
 draft: false
 ---

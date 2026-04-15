@@ -3,7 +3,7 @@ title: "제주시트러스랩스 매거진을 시작합니다"
 description: "제주의 감귤박에서 시작된 업사이클링 뷰티, 그 이야기를 전합니다."
 date: 2026-04-14
 category: "brand-story"
-thumbnail: ""
+thumbnail: "/images/blog/hello-jejulabs.jpg"
 author: "JEJULABS"
 draft: false
 ---

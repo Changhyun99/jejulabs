@@ -381,12 +381,15 @@ body {
    NEWSLETTER CTA
    ================================================ */
 .newsletter-cta {
-  max-width: var(--jl-max-width); margin: var(--jl-space-3xl) auto 0;
-  padding: var(--jl-space-3xl) var(--jl-space-xl);
-  background: var(--jl-bg-gnb); border-radius: var(--jl-radius-lg);
+  max-width: 640px;
+  margin: 64px auto;
+  padding: 48px 32px;
+  background: var(--jl-terra);
+  border-radius: 16px;
   text-align: center;
-  margin-left: var(--jl-space-lg); margin-right: var(--jl-space-lg);
+  color: #FFFFFF;
 }
+
 .newsletter-cta-title {
   font-size: 1.5rem; font-weight: 800; color: var(--jl-lime);
   margin-bottom: var(--jl-space-md);
@@ -565,16 +568,23 @@ body {
 }
 .about-value-card p { font-size: 0.85rem; color: var(--jl-text-secondary); line-height: 1.6; }
 .about-quote {
-  max-width: var(--jl-max-width); margin: var(--jl-space-xl) auto;
-  padding: var(--jl-space-2xl) var(--jl-space-xl);
-  background: var(--jl-bg-card-terra); color: #FFFFFF;
-  border-radius: var(--jl-radius-lg); text-align: center;
-  margin-left: var(--jl-space-lg); margin-right: var(--jl-space-lg);
+  max-width: 720px;
+  margin: 64px auto;
+  padding: 48px 32px;
+  text-align: center;
+  border-left: none;
+  border-top: 3px solid var(--jl-terra);
+  border-bottom: 3px solid var(--jl-terra);
 }
 .about-quote p {
-  font-size: 1.1rem; font-weight: 600; line-height: 1.7;
-  color: #FFFFFF; margin-bottom: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--jl-text);
+  margin: 0;
 }
+
 .about-cta {
   text-align: center; padding: var(--jl-space-3xl) var(--jl-space-lg);
 }

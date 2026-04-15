@@ -3,7 +3,7 @@ title: "감귤박 화장품 기초 3종 세트, 개발 이야기"
 description: "토너, 세럼, 크림. 감귤박에서 탄생한 기초 3종의 개발 과정을 공개합니다."
 date: 2026-04-06
 category: "brand-story"
-thumbnail: ""
+thumbnail: "/images/blog/skincare-basic-3.jpg"
 author: "JEJULABS"
 draft: false
 ---

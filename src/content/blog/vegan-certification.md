@@ -3,7 +3,7 @@ title: "비건 인증, 왜 중요한가"
 description: "비건 화장품 인증의 의미와 제주시트러스랩스의 클린뷰티 철학을 이야기합니다."
 date: 2026-04-04
 category: "beauty-lab"
-thumbnail: ""
+thumbnail: "/images/blog/vegan-certification.jpg"
 author: "JEJULABS"
 draft: false
 ---
