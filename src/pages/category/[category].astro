@@ -2,6 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+export function getStaticPaths() {
+  const categories = ['brand-story', 'ingredient', 'beauty-lab', 'jeju-life', 'notice'];
+  return categories.map(category => ({
+    params: { category },
+  }));
+}
+
 const categoryConfig: Record<string, { name: string; description: string }> = {
   'brand-story': { name: 'Brand Story', description: '제주시트러스랩스의 여정과 철학을 이야기합니다.' },
   'ingredient': { name: 'Ingredient', description: '제주 원료의 가치를 탐구합니다.' },
@@ -10,19 +17,6 @@ const categoryConfig: Record<string, { name: string; description: string }> = {
   'notice': { name: 'Notice', description: '공지사항과 소식을 전합니다.' },
 };
 
-export function getStaticPaths() {
-  return Object.keys(categoryConfig).map(category => ({
-    params: { category },
-  }));
-}
-
-const { category } = Astro.params;
-const config = categoryConfig[category] || { name: category, description: '' };
-
-const posts = (await getCollection('blog'))
-  .filter(post => !post.data.draft && post.data.category === category)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
 const categoryNames: Record<string, string> = {
   'brand-story': 'Brand Story',
   'ingredient': 'Ingredient',
@@ -30,6 +24,13 @@ const categoryNames: Record<string, string> = {
   'jeju-life': 'Jeju Life',
   'notice': 'Notice',
 };
+
+const { category } = Astro.params;
+const config = categoryConfig[category] || { name: category, description: '' };
+
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft && post.data.category === category)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function formatDate(date: Date) {
   return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
