@@ -87,7 +87,7 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
   </footer>
 
   <!-- MENU SCRIPT -->
-  <script>
+  <script is:inline>
     const hamburger = document.getElementById('hamburger');
     const gnb = document.getElementById('gnb');
     const dimmed = document.getElementById('dimmed');
@@ -113,21 +113,28 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
       link.addEventListener('click', closeMenu);
     });
 
-    const identity = (window as any).netlifyIdentity;
-    if (identity) {
-      identity.on('init', (user: any) => {
+    // Netlify Identity
+    function handleIdentity() {
+      if (!window.netlifyIdentity) {
+        setTimeout(handleIdentity, 100);
+        return;
+      }
+
+      var hash = window.location.hash || '';
+      if (hash.includes('invite_token') || hash.includes('recovery_token') || hash.includes('confirmation_token')) {
+        window.netlifyIdentity.open();
+      }
+
+      window.netlifyIdentity.on('init', function(user) {
         if (!user) {
-          identity.on('login', () => {
+          window.netlifyIdentity.on('login', function() {
             document.location.href = '/admin/';
           });
         }
-
-        const hash = window.location.hash;
-        if (hash.includes('invite_token') || hash.includes('recovery_token')) {
-          identity.open();
-        }
       });
     }
+
+    handleIdentity();
   </script>
 
 </body>
