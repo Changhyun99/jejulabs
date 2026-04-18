@@ -121,6 +121,10 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
           });
         }
       });
+
+      if (window.location.hash.includes('invite_token') || window.location.hash.includes('recovery_token')) {
+        window.netlifyIdentity.open();
+      }
     }
   </script>
 
