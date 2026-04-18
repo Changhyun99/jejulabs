@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images/blog
+public_folder: /images/blog
+
+locale: ko
+
+collections:
+  - name: blog
+    label: 매거진 글
+    label_singular: 글
+    folder: src/content/blog
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: 제목, widget: string }
+      - { name: description, label: 요약 (카드에 표시됨), widget: text }
+      - name: date
+        label: 발행일
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+      - name: category
+        label: 카테고리
+        widget: select
+        options:
+          - { label: "Brand Story", value: "brand-story" }
+          - { label: "Ingredient", value: "ingredient" }
+          - { label: "Beauty Lab", value: "beauty-lab" }
+          - { label: "Jeju Life", value: "jeju-life" }
+          - { label: "Notice", value: "notice" }
+      - name: thumbnail
+        label: 썸네일 이미지
+        widget: image
+        required: false
+      - { name: author, label: 작성자, widget: string, default: "JEJULABS" }
+      - { name: draft, label: 임시저장 (체크 시 비공개), widget: boolean, default: false }
+      - { name: body, label: 본문, widget: markdown }

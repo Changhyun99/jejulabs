@@ -17,6 +17,7 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
   <meta name="description" content={description} />
   <title>{title} | JEJULABS MAGAZINE</title>
   <link rel="icon" href="/favicon.ico" />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -111,6 +112,16 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
     document.querySelectorAll('.gnb-list a').forEach(link => {
       link.addEventListener('click', closeMenu);
     });
+
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
   </script>
 
 </body>
