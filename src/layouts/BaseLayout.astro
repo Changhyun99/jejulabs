@@ -113,18 +113,20 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
       link.addEventListener('click', closeMenu);
     });
 
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', user => {
+    const identity = (window as any).netlifyIdentity;
+    if (identity) {
+      identity.on('init', (user: any) => {
         if (!user) {
-          window.netlifyIdentity.on('login', () => {
+          identity.on('login', () => {
             document.location.href = '/admin/';
           });
         }
-      });
 
-      if (window.location.hash.includes('invite_token') || window.location.hash.includes('recovery_token')) {
-        window.netlifyIdentity.open();
-      }
+        const hash = window.location.hash;
+        if (hash.includes('invite_token') || hash.includes('recovery_token')) {
+          identity.open();
+        }
+      });
     }
   </script>
 
