@@ -55,7 +55,7 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
     <p class="gnb-category">Connect</p>
     <ul class="gnb-list">
       <li><a href="https://instagram.com/jejulabs_official" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="mailto:contact@jejulabs.com" class="copy-email-link">Contact</a></li>
+      <li><a href="/contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -76,7 +76,7 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
         <a href="https://smartstore.naver.com/jejulabs" target="_blank" rel="noopener">Shop</a>
         <a href="https://instagram.com/jejulabs_official" target="_blank" rel="noopener">Instagram</a>
         <a href="/about">About</a>
-        <a href="mailto:contact@jejulabs.com" class="copy-email-link">Contact</a>
+        <a href="/contact">Contact</a>
       </div>
       <p class="footer-copy">&copy; 2026 JEJU CITRUS LABS. All rights reserved.</p>
     </div>
@@ -132,17 +132,6 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
 
     handleIdentity();
 
-    // Copy email to clipboard
-    document.querySelectorAll('.copy-email-link').forEach(function(el) {
-      el.addEventListener('click', function(e) {
-        e.preventDefault();
-        navigator.clipboard.writeText('contact@jejulabs.com').then(function() {
-          var original = el.textContent;
-          el.textContent = '복사됨!';
-          setTimeout(function() { el.textContent = original; }, 2000);
-        });
-      });
-    });
   </script>
 
 </body>
