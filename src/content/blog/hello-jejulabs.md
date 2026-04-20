@@ -5,7 +5,7 @@ date: 2026-04-14
 category: "people"
 thumbnail: "/images/blog/hello-jejulabs.jpg"
 author: "JEJULABS"
-draft: true
+draft: false
 ---
 
 ## 안녕하세요, 제주시트러스랩스입니다

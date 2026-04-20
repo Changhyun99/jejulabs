@@ -5,7 +5,7 @@ date: 2026-04-10
 category: "making"
 thumbnail: "/images/blog/clean-beauty-trend.jpg"
 author: "JEJULABS"
-draft: true
+draft: false
 ---
 
 ## 클린뷰티란?

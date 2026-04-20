@@ -5,7 +5,7 @@ date: 2026-04-06
 category: "making"
 thumbnail: "/images/blog/skincare-basic-3.jpg"
 author: "JEJULABS"
-draft: true
+draft: false
 ---
 
 ## 왜 기초 3종인가

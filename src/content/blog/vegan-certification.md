@@ -5,7 +5,7 @@ date: 2026-04-04
 category: "making"
 thumbnail: "/images/blog/vegan-certification.jpg"
 author: "JEJULABS"
-draft: true
+draft: false
 ---
 
 ## 비건 화장품이란

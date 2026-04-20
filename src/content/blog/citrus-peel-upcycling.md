@@ -5,7 +5,7 @@ date: 2026-04-12
 category: "discovery"
 thumbnail: "/images/blog/citrus-peel-upcycling.jpg"
 author: "JEJULABS"
-draft: true
+draft: false
 ---
 
 ## 감귤박이란?
