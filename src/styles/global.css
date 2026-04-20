@@ -403,7 +403,7 @@ body {
   max-width: 480px; margin: 0 auto;
 }
 .newsletter-cta-form input[type="email"] {
-  flex: 1; padding: 14px 20px;
+  flex: 1; min-width: 0; padding: 14px 20px;
   background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
   border-radius: var(--jl-radius-md); color: #FFFFFF;
   font-family: var(--jl-font); font-size: 0.9rem;
