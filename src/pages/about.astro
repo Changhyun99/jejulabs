@@ -183,7 +183,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .brand-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.35)}
   .brand-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(92,46,26,.4) 0%,rgba(92,46,26,.75) 100%);z-index:1}
   .brand-hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center;padding:0 24px}
-  .brand-hero-logo{width:72px;height:auto;margin-bottom:32px;filter:brightness(0) invert(1);opacity:.9}
+  .brand-hero-logo{
+  width:72px;
+  height:auto;
+  margin:0 auto 32px;
+  display:block;
+  filter:brightness(0) invert(1);
+  opacity:.9;
+}
+
   .brand-hero-name{font-size:.85rem;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:#F9FEC7;margin-bottom:28px}
   .brand-hero-inner h1{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:300;color:#fff;line-height:1.5;margin-bottom:20px}
   .brand-hero-inner h1 strong{font-weight:900}
