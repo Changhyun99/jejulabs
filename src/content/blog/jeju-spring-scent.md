@@ -2,10 +2,10 @@
 title: "제주의 봄, 감귤꽃 향이 피어오르는 계절"
 description: "4월의 제주는 감귤꽃 향기로 가득합니다. 제주의 봄을 담은 이야기."
 date: 2026-04-08
-category: "jeju-life"
+category: "jeju"
 thumbnail: "/images/blog/jeju-spring-scent.jpg"
 author: "JEJULABS"
-draft: false
+draft: true
 ---
 
 ## 감귤꽃이 피는 4월

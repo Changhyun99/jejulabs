@@ -3,25 +3,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
-  const categories = ['brand-story', 'ingredient', 'beauty-lab', 'jeju-life', 'notice'];
+  const categories = ['people', 'discovery', 'making', 'jeju', 'notice'];
   return categories.map(category => ({
     params: { category },
   }));
 }
 
 const categoryConfig: Record<string, { name: string; description: string }> = {
-  'brand-story': { name: 'Brand Story', description: '제주시트러스랩스의 여정과 철학을 이야기합니다.' },
-  'ingredient': { name: 'Ingredient', description: '제주 원료의 가치를 탐구합니다.' },
-  'beauty-lab': { name: 'Beauty Lab', description: '클린뷰티 트렌드와 스킨케어 인사이트를 나눕니다.' },
-  'jeju-life': { name: 'Jeju Life', description: '제주의 문화, 사람, 그리고 라이프스타일.' },
+  'people': { name: 'People', description: '창업자 이야기, 농부·협업자 인터뷰, 브랜드를 만드는 사람들.' },
+  'discovery': { name: 'Discovery', description: '감귤박, 돌담, 해풍, 현무암. 제주 본질을 탐구합니다.' },
+  'making': { name: 'Making', description: '제품 개발 과정, 실험, 실패담, 포뮬러 기록.' },
+  'jeju': { name: 'Jeju', description: '제주의 계절, 풍경, 일상, 음식. 감각적 기록.' },
   'notice': { name: 'Notice', description: '공지사항과 소식을 전합니다.' },
 };
 
 const categoryNames: Record<string, string> = {
-  'brand-story': 'Brand Story',
-  'ingredient': 'Ingredient',
-  'beauty-lab': 'Beauty Lab',
-  'jeju-life': 'Jeju Life',
+  'people': 'People',
+  'discovery': 'Discovery',
+  'making': 'Making',
+  'jeju': 'Jeju',
   'notice': 'Notice',
 };
 

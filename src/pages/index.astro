@@ -7,10 +7,10 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const categoryNames: Record<string, string> = {
-  'brand-story': 'Brand Story',
-  'ingredient': 'Ingredient',
-  'beauty-lab': 'Beauty Lab',
-  'jeju-life': 'Jeju Life',
+  'people': 'People',
+  'discovery': 'Discovery',
+  'making': 'Making',
+  'jeju': 'Jeju',
   'notice': 'Notice',
 };
 

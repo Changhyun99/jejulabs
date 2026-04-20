@@ -2,10 +2,10 @@
 title: "2026 클린뷰티 트렌드, 제주에서 답을 찾다"
 description: "비건, 지속가능성, 업사이클링. 올해 클린뷰티의 핵심 키워드를 정리했습니다."
 date: 2026-04-10
-category: "beauty-lab"
+category: "making"
 thumbnail: "/images/blog/clean-beauty-trend.jpg"
 author: "JEJULABS"
-draft: false
+draft: true
 ---
 
 ## 클린뷰티란?
