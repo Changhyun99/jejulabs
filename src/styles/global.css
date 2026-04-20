@@ -412,11 +412,13 @@ body {
 .newsletter-cta-form input[type="email"]::placeholder { color: rgba(255,255,255,0.4); }
 .newsletter-cta-form input[type="email"]:focus { border-color: var(--jl-lime); }
 .newsletter-cta-form button {
-  padding: 14px 28px; background: var(--jl-terra);
+  padding: 14px 28px; background: transparent;
   color: #FFFFFF; font-size: 0.85rem; font-weight: 700;
+  border: 1.5px solid rgba(255,255,255,0.7);
   border-radius: var(--jl-radius-md); transition: var(--jl-transition);
   white-space: nowrap;
 }
+.newsletter-cta-form button:hover { background: rgba(255,255,255,0.15); }
 .newsletter-cta-form button:hover { background: var(--jl-terra-light); }
 
 /* ================================================
