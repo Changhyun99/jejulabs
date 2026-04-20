@@ -38,4 +38,8 @@ draft: false
 
 ---
 
-구매는 [네이버 스마트스토어](https://smartstore.naver.com/jejulabs)에서 할 수 있습니다.
+<div class="article-shop-cta">
+  <a href="https://smartstore.naver.com/jejulabs" target="_blank" rel="noopener" class="btn-primary">
+    네이버 스마트스토어에서 보기
+  </a>
+</div>

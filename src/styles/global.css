@@ -643,6 +643,12 @@ body {
   font-style: italic;
 }
 
+/* Shop CTA in article body */
+.article-shop-cta {
+  margin: var(--jl-space-2xl) 0 var(--jl-space-lg);
+  text-align: center;
+}
+
 /* Related articles */
 .related-articles {
   max-width: 720px; margin: 0 auto;
