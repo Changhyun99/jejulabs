@@ -184,6 +184,8 @@ body {
    ================================================ */
 .editorial-grid {
   width: 100%;
+  /* 그리드 컨테이너 배경색 = 갭 사이로 보이는 구분선 색상 */
+  background: var(--jl-bg);
 }
 
 .editorial-block {
@@ -192,6 +194,13 @@ body {
   grid-template-rows: 1fr 1fr;
   width: 100%;
   height: clamp(500px, 56vw, 840px);
+  /* ★ 핵심: 셀 사이 2px 간격 → 배경색이 비쳐서 구분선 역할 */
+  gap: 2px;
+}
+
+/* ★ 블록과 블록 사이 구분 — 민트 배경이 얇게 보이도록 margin으로 처리 */
+.editorial-block + .editorial-block {
+  margin-top: 2px;
 }
 
 .editorial-block .grid-post {
@@ -281,7 +290,7 @@ body {
 
 /* ---- tall 카드 텍스트 강조 ---- */
 .cell-tall .grid-post-title {
-  font-size: 1.45rem;
+  font-size: 1.55rem;
 }
 .cell-tall .grid-post-desc {
   -webkit-line-clamp: 3; line-clamp: 3;
@@ -290,50 +299,29 @@ body {
   padding: 80px 36px 36px;
 }
 
-/* ---- 셀 구분 디자인 ---- */
+/* ================================================
+   ★ 셀 구분 디자인 — 갭 + inset shadow + 오버레이 차등
+   ================================================ */
 
-/* 블록 간 경계 — 굵은 라인 */
-.editorial-block + .editorial-block {
-  border-top: 3px solid var(--jl-text-primary);
+/* short 카드: 안쪽에 미세한 밝은 프레임 → tall 카드와 시각적 위계 구분 */
+.cell-short-top,
+.cell-short-bottom {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
 }
 
-/* tall 카드와 short 카드 사이 — 세로 구분선 */
-.editorial-block .grid-post {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  background: var(--jl-terra-dark);
+/* short 카드 오버레이를 tall보다 약간 더 어둡게 → 위계 강조 */
+.cell-short-top .grid-post-overlay,
+.cell-short-bottom .grid-post-overlay {
+  background: linear-gradient(to top, rgba(20,40,30,0.95) 0%, rgba(20,40,30,0.6) 50%, transparent 100%);
 }
 
-/* tall-left: 오른쪽 short 카드들에 왼쪽 보더 */
-.editorial-block.tall-left .cell-short-top,
-.editorial-block.tall-left .cell-short-bottom {
-  border-left: 1px solid rgba(255,255,255,0.15);
-}
+/* tall 카드: 안쪽 프레임 없음, 오버레이 기본값 유지 → 주인공 느낌 */
 
-/* tall-left: 아래 short 카드에 위쪽 보더 */
-.editorial-block.tall-left .cell-short-bottom {
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-/* tall-right: 왼쪽 short 카드들에 오른쪽 보더 */
-.editorial-block.tall-right .cell-short-top,
-.editorial-block.tall-right .cell-short-bottom {
-  border-right: 1px solid rgba(255,255,255,0.15);
-}
-
-/* tall-right: 아래 short 카드에 위쪽 보더 */
-.editorial-block.tall-right .cell-short-bottom {
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-/* short 카드 호버 시 구분선 강조 */
-.cell-short-top:hover,
-.cell-short-bottom:hover {
+/* 호버 시 — 어떤 셀이든 안쪽에 라임색 미세 프레임 등장 */
+.grid-post:hover {
   z-index: 1;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25);
+  box-shadow: inset 0 0 0 2px var(--jl-lime);
 }
-
 
 /* ---- 에디토리얼 그리드 반응형 ---- */
 @media (max-width: 1023px) {
@@ -349,6 +337,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     height: auto;
+    gap: 2px;
   }
   .editorial-block.tall-left .cell-tall,
   .editorial-block.tall-right .cell-tall,
