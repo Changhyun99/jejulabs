@@ -814,7 +814,7 @@ body {
    ================================================ */
 #footer {
   background: var(--jl-bg-footer);
-  margin-top: var(--jl-space-3xl);
+  margin-top: 0;
 }
 .footer-inner {
   max-width: var(--jl-max-width); margin: 0 auto;
