@@ -2,14 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const PAGE_SIZE = 9;
-
-const allPosts = (await getCollection('blog'))
+const posts = (await getCollection('blog'))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const posts = allPosts.slice(0, PAGE_SIZE);
-const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
 
 const categoryNames: Record<string, string> = {
   'people': 'People',
@@ -20,70 +15,76 @@ const categoryNames: Record<string, string> = {
 };
 
 function formatDate(date: Date) {
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ');
 }
 
-function pageUrl(page: number) {
-  return page === 1 ? '/' : `/page/${page}`;
+// 3개씩 묶어서 블록 단위로 분리
+const blocks: typeof posts[] = [];
+for (let i = 0; i < posts.length; i += 3) {
+  blocks.push(posts.slice(i, i + 3));
 }
 ---
 
 <BaseLayout title="Home">
+  <div class="main-content">
+    <div class="editorial-grid">
+      {blocks.map((block, blockIndex) => {
+        const isEven = blockIndex % 2 === 0;
+        // even 블록: 왼쪽 tall (0=tall, 1=short-top, 2=short-bottom)
+        // odd 블록: 오른쪽 tall (0=short-top, 1=short-bottom, 2=tall)
+        return (
+          <div class={`editorial-block ${isEven ? 'tall-left' : 'tall-right'}`}>
+            {block.map((post, i) => {
+              let posClass = '';
+              if (isEven) {
+                posClass = i === 0 ? 'cell-tall' : i === 1 ? 'cell-short-top' : 'cell-short-bottom';
+              } else {
+                posClass = i === 0 ? 'cell-short-top' : i === 1 ? 'cell-short-bottom' : 'cell-tall';
+              }
+              return (
+                <article class={`grid-post ${posClass}`}>
+                  <a href={`/blog/${post.id}`}>
+                    {post.data.thumbnail ? (
+                      <img class="grid-post-img" src={post.data.thumbnail} alt={post.data.title} />
+                    ) : (
+                      <div class="grid-post-placeholder" />
+                    )}
+                    <div class="grid-post-overlay">
+                      <span class="grid-post-category">
+                        {categoryNames[post.data.category] || post.data.category}
+                      </span>
+                      <h2 class="grid-post-title">{post.data.title}</h2>
+                      <p class="grid-post-desc">{post.data.description}</p>
+                      <div class="grid-post-meta">
+                        <span class="grid-post-author">{post.data.author}</span>
+                        <time>{formatDate(post.data.date)}</time>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
 
-  <div class="post-grid">
-    {posts.map((post, index) => {
-      const pos = index % 6;
-      return (
-        <article class={`grid-post pos-${pos}`}>
-          <a href={`/blog/${post.id}`}>
-            {post.data.thumbnail
-              ? <img src={post.data.thumbnail} alt={post.data.title} class="grid-post-img" />
-              : <div class="grid-post-placeholder"></div>
-            }
-            <div class="grid-post-overlay">
-              <span class="grid-post-category">
-                {categoryNames[post.data.category] || post.data.category}
-              </span>
-              <h2 class="grid-post-title">{post.data.title}</h2>
-              <p class="grid-post-desc">{post.data.description}</p>
-              <div class="grid-post-meta">
-                <span class="grid-post-author">{post.data.author}</span>
-                <time>{formatDate(post.data.date)}</time>
-              </div>
-            </div>
-          </a>
-        </article>
-      );
-    })}
+    {/* NEWSLETTER CTA */}
+    <div class="newsletter-cta">
+      <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br/>놓치지 않으려면.</h2>
+      <p class="newsletter-cta-desc">이메일을 남겨주세요.<br/>제주랩스의 새로운 이야기가 찾아갑니다.</p>
+      <form
+        class="newsletter-cta-form"
+        name="newsletter"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="newsletter" />
+        <input type="hidden" name="bot-field" />
+        <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required />
+        <button type="submit">구독하기</button>
+      </form>
+    </div>
   </div>
-
-  {totalPages > 1 && (
-    <nav class="pagination" aria-label="페이지 탐색">
-      <span class="pagination-btn is-disabled">← 이전</span>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-        <a href={pageUrl(page)} class={`pagination-btn ${page === 1 ? 'is-active' : ''}`}>
-          {page}
-        </a>
-      ))}
-      <a href={pageUrl(2)} class="pagination-btn">다음 →</a>
-    </nav>
-  )}
-
-  <div class="newsletter-cta">
-    <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br>놓치지 않으려면.</h2>
-    <p class="newsletter-cta-desc">이메일을 남겨주세요.<br>제주랩스의 새로운 이야기가 찾아갑니다.</p>
-    <form
-      class="newsletter-cta-form"
-      name="newsletter"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-    >
-      <input type="hidden" name="form-name" value="newsletter" />
-      <input type="hidden" name="bot-field" />
-      <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required />
-      <button type="submit">구독하기</button>
-    </form>
-  </div>
-
 </BaseLayout>
