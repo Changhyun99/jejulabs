@@ -180,51 +180,100 @@ body {
 }
 
 /* ================================================
-   HERO POST
+   POST GRID — 홈 메인 (6분할 에디토리얼 그리드)
    ================================================ */
-.hero-post {
-  position: relative; margin-bottom: var(--jl-space-2xl); overflow: hidden;
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr;
 }
-.hero-post a { display: block; position: relative; }
-.hero-post-image {
-  width: 100%; aspect-ratio: 16/9; max-height: 560px; overflow: hidden;
+
+.grid-post {
+  position: relative;
+  overflow: hidden;
+  height: 72vw;
+  max-height: 420px;
+  background: var(--jl-terra-dark);
 }
-.hero-post-image img {
+
+.grid-post a {
+  display: block;
+  width: 100%; height: 100%;
+}
+
+.grid-post-img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
 }
-.hero-post:hover .hero-post-image img { transform: scale(1.03); }
-.hero-post-image-placeholder {
-  width: 100%; aspect-ratio: 16/9; max-height: 560px;
-  background: linear-gradient(135deg, var(--jl-terra-dark) 0%, var(--jl-terra) 50%, var(--jl-terra-light) 100%);
+.grid-post:hover .grid-post-img { transform: scale(1.04); }
+
+.grid-post-placeholder {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--jl-terra-dark) 0%, var(--jl-terra-light) 100%);
 }
-.hero-post-overlay {
+
+.grid-post-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 60px 48px 48px;
-  background: linear-gradient(to top, rgba(26,58,42,0.9) 0%, rgba(26,58,42,0.45) 50%, transparent 100%);
+  padding: 56px 24px 24px;
+  background: linear-gradient(to top, rgba(20,40,30,0.92) 0%, rgba(20,40,30,0.5) 55%, transparent 100%);
 }
-.hero-post-category {
-  display: inline-block; font-size: 0.72rem; font-weight: 700;
+
+.grid-post-category {
+  display: inline-block;
+  font-size: 0.65rem; font-weight: 700;
   color: var(--jl-terra-deep); background: var(--jl-lime);
-  padding: 4px 12px; text-transform: uppercase; letter-spacing: 0.1em;
-  margin-bottom: var(--jl-space-md); border-radius: var(--jl-radius-sm);
+  padding: 3px 10px; text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 8px; border-radius: var(--jl-radius-sm);
 }
-.hero-post-title {
-  font-size: 2.2rem; font-weight: 800; color: #FFFFFF;
-  line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em;
+
+.grid-post-title {
+  font-size: 1.1rem; font-weight: 800; color: #FFFFFF;
+  line-height: 1.3; margin-bottom: 6px; letter-spacing: -0.02em;
 }
-.hero-post-desc {
-  font-size: 1rem; color: rgba(255,255,255,0.85);
-  line-height: 1.6; margin-bottom: var(--jl-space-md); max-width: 600px;
+
+.grid-post-desc {
+  font-size: 0.82rem; color: rgba(255,255,255,0.78);
+  line-height: 1.6; margin-bottom: 10px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.hero-post-meta {
-  display: flex; align-items: center; gap: var(--jl-space-md);
-  font-size: 0.8rem; color: rgba(255,255,255,0.6);
+
+.grid-post-meta {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.72rem; color: rgba(255,255,255,0.55);
 }
-.hero-post-author { font-weight: 600; color: var(--jl-lime); }
+.grid-post-author { font-weight: 600; color: var(--jl-lime); }
+
+/* Desktop: 6분할 그리드 */
+@media (min-width: 1024px) {
+  .post-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: clamp(220px, 28vw, 420px);
+  }
+
+  .grid-post { height: auto; max-height: none; }
+
+  /* 열 배치 */
+  .pos-0 { grid-column: 1; grid-row: span 2; }
+  .pos-1 { grid-column: 2; }
+  .pos-2 { grid-column: 2; }
+  .pos-3 { grid-column: 1; }
+  .pos-4 { grid-column: 1; }
+  .pos-5 { grid-column: 2; grid-row: span 2; }
+
+  /* tall 카드 텍스트 강조 */
+  .pos-0 .grid-post-title,
+  .pos-5 .grid-post-title { font-size: 1.55rem; }
+
+  .pos-0 .grid-post-desc,
+  .pos-5 .grid-post-desc { -webkit-line-clamp: 3; }
+
+  .pos-0 .grid-post-overlay,
+  .pos-5 .grid-post-overlay { padding: 80px 36px 36px; }
+}
 
 /* ================================================
-   POST LIST (2-col grid, 16px gap)
+   POST LIST — 카테고리 페이지용 (2-col grid)
    ================================================ */
 .post-list {
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -239,11 +288,7 @@ body {
   transition: var(--jl-transition); overflow: hidden;
   box-shadow: var(--jl-shadow-sm);
 }
-.post-item:hover {
-  box-shadow: var(--jl-shadow-md);
-  transform: translateY(-2px);
-}
-/* 테라코타 카드 */
+.post-item:hover { box-shadow: var(--jl-shadow-md); transform: translateY(-2px); }
 .post-item.orange { background: var(--jl-bg-card-terra); border-color: transparent; }
 .post-item.orange:hover { background: var(--jl-bg-card-terra-hover); }
 .post-item.orange .post-item-category { background: var(--jl-lime); color: var(--jl-terra-deep); }
@@ -255,9 +300,7 @@ body {
   background: linear-gradient(135deg, var(--jl-terra-dark) 0%, var(--jl-terra-deep) 100%);
 }
 .post-item a { display: flex; flex-direction: column; height: 100%; }
-.post-item-image {
-  width: 100%; aspect-ratio: 4/3; overflow: hidden;
-}
+.post-item-image { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
 .post-item-image img {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
@@ -290,50 +333,6 @@ body {
 .post-item-footer { display: flex; align-items: center; justify-content: space-between; }
 .post-item-author { font-size: 0.78rem; font-weight: 600; color: var(--jl-terra); }
 .post-item-date { font-size: 0.75rem; color: var(--jl-text-muted); }
-
-/* ================================================
-   FEATURE POST (large mid-hero)
-   ================================================ */
-.feature-post {
-  grid-column: 1 / -1; position: relative; overflow: hidden;
-  border-radius: var(--jl-radius-lg); margin: var(--jl-space-lg) 0;
-}
-.feature-post a { display: block; position: relative; }
-.feature-post-image {
-  width: 100%; aspect-ratio: 16/9; overflow: hidden;
-}
-.feature-post-image img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
-}
-.feature-post:hover .feature-post-image img { transform: scale(1.03); }
-.feature-post-image-placeholder {
-  width: 100%; aspect-ratio: 16/9;
-  background: linear-gradient(135deg, var(--jl-terra) 0%, var(--jl-terra-light) 50%, var(--jl-lime) 100%);
-}
-.feature-post-overlay {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: var(--jl-space-2xl) var(--jl-space-2xl) var(--jl-space-xl);
-  background: linear-gradient(to top, rgba(26,58,42,0.9) 0%, rgba(26,58,42,0.4) 50%, transparent 100%);
-}
-.feature-post-category {
-  display: inline-block; font-size: 0.72rem; font-weight: 700;
-  color: var(--jl-terra-deep); background: var(--jl-lime);
-  padding: 4px 12px; text-transform: uppercase; letter-spacing: 0.1em;
-  margin-bottom: var(--jl-space-md); border-radius: var(--jl-radius-sm);
-}
-.feature-post-title {
-  font-size: 1.6rem; font-weight: 800; color: #FFFFFF;
-  line-height: 1.3; margin-bottom: var(--jl-space-sm);
-}
-.feature-post-desc {
-  font-size: 0.95rem; color: rgba(255,255,255,0.8);
-  line-height: 1.6; margin-bottom: var(--jl-space-md); max-width: 600px;
-}
-.feature-post-meta {
-  display: flex; align-items: center; gap: var(--jl-space-md);
-  font-size: 0.8rem; color: rgba(255,255,255,0.6);
-}
 
 /* ================================================
    PRODUCT DISCOVERY MODULE
@@ -715,10 +714,6 @@ body {
    ================================================ */
 @media (max-width: 1023px) {
   .header-inner { padding: 0 var(--jl-space-lg); }
-  .hero-post-image { aspect-ratio: 16/9; }
-  .hero-post-overlay { padding: var(--jl-space-2xl) var(--jl-space-xl) var(--jl-space-xl); }
-  .hero-post-title { font-size: 1.8rem; }
-  .feature-post-title { font-size: 1.4rem; }
   .product-cards { grid-template-columns: repeat(2, 1fr); }
   .product-why-grid { grid-template-columns: repeat(2, 1fr); }
   .about-value-grid { grid-template-columns: repeat(2, 1fr); }
@@ -734,12 +729,6 @@ body {
   .logo-img { height: 28px; }
   .tagline { display: none; }
 
-  .hero-post-image { aspect-ratio: 3/2; }
-  .hero-post-overlay { padding: var(--jl-space-xl) var(--jl-space-md) var(--jl-space-lg); }
-  .hero-post-title { font-size: 1.4rem; }
-  .hero-post-desc { font-size: 0.88rem; }
-  .hero-post-category { font-size: 0.65rem; }
-
   .post-list {
     grid-template-columns: 1fr;
     padding: 0 var(--jl-space-md);
@@ -747,9 +736,6 @@ body {
   }
   .post-item-body { padding: var(--jl-space-lg); }
   .post-item-title { font-size: 1.1rem; }
-
-  .feature-post-title { font-size: 1.2rem; }
-  .feature-post-overlay { padding: var(--jl-space-xl) var(--jl-space-md); }
 
   .product-cards { grid-template-columns: 1fr; }
   .product-why-grid { grid-template-columns: repeat(2, 1fr); }

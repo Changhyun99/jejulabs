@@ -14,120 +14,55 @@ const categoryNames: Record<string, string> = {
   'notice': 'Notice',
 };
 
-const heroPost = posts[0];
-const restPosts = posts.slice(1);
-
 function formatDate(date: Date) {
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ');
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
 ---
 
 <BaseLayout title="Home">
-  <div class="main-content">
 
-    {/* HERO POST */}
-    {heroPost && (
-      <article class="hero-post">
-        <a href={`/blog/${heroPost.id}`}>
-          {heroPost.data.thumbnail ? (
-            <div class="hero-post-image">
-              <img src={heroPost.data.thumbnail} alt={heroPost.data.title} />
-            </div>
-          ) : (
-            <div class="hero-post-image-placeholder"></div>
-          )}
-          <div class="hero-post-overlay">
-            <span class="hero-post-category">
-              {categoryNames[heroPost.data.category] || heroPost.data.category}
-            </span>
-            <h2 class="hero-post-title">{heroPost.data.title}</h2>
-            <p class="hero-post-desc">{heroPost.data.description}</p>
-            <div class="hero-post-meta">
-              <span class="hero-post-author">{heroPost.data.author}</span>
-              <time>{formatDate(heroPost.data.date)}</time>
-            </div>
-          </div>
-        </a>
-      </article>
-    )}
-
-    {/* POST LIST */}
-    <div class="post-list">
-      {restPosts.map((post, index) => {
-        const isFeature = index > 0 && index % 4 === 3;
-        const isOrange = index % 2 === 1;
-
-        if (isFeature) {
-          return (
-            <article class="feature-post">
-              <a href={`/blog/${post.id}`}>
-                {post.data.thumbnail ? (
-                  <div class="feature-post-image">
-                    <img src={post.data.thumbnail} alt={post.data.title} />
-                  </div>
-                ) : (
-                  <div class="feature-post-image-placeholder"></div>
-                )}
-                <div class="feature-post-overlay">
-                  <span class="feature-post-category">
-                    {categoryNames[post.data.category] || post.data.category}
-                  </span>
-                  <h2 class="feature-post-title">{post.data.title}</h2>
-                  <p class="feature-post-desc">{post.data.description}</p>
-                  <div class="feature-post-meta">
-                    <span>{post.data.author}</span>
-                    <time>{formatDate(post.data.date)}</time>
-                  </div>
-                </div>
-              </a>
-            </article>
-          );
-        }
-
-        return (
-          <article class={`post-item ${isOrange ? 'orange' : ''}`}>
-            <a href={`/blog/${post.id}`}>
-              {post.data.thumbnail ? (
-                <div class="post-item-image">
-                  <img src={post.data.thumbnail} alt={post.data.title} />
-                </div>
-              ) : (
-                <div class="post-item-image-placeholder"></div>
-              )}
-              <div class="post-item-body">
-                <span class="post-item-category">
-                  {categoryNames[post.data.category] || post.data.category}
-                </span>
-                <h2 class="post-item-title">{post.data.title}</h2>
-                <p class="post-item-desc">{post.data.description}</p>
-                <div class="post-item-footer">
-                  <span class="post-item-author">{post.data.author}</span>
-                  <time class="post-item-date">{formatDate(post.data.date)}</time>
-                </div>
+  <div class="post-grid">
+    {posts.map((post, index) => {
+      const pos = index % 6;
+      return (
+        <article class={`grid-post pos-${pos}`}>
+          <a href={`/blog/${post.id}`}>
+            {post.data.thumbnail
+              ? <img src={post.data.thumbnail} alt={post.data.title} class="grid-post-img" />
+              : <div class="grid-post-placeholder"></div>
+            }
+            <div class="grid-post-overlay">
+              <span class="grid-post-category">
+                {categoryNames[post.data.category] || post.data.category}
+              </span>
+              <h2 class="grid-post-title">{post.data.title}</h2>
+              <p class="grid-post-desc">{post.data.description}</p>
+              <div class="grid-post-meta">
+                <span class="grid-post-author">{post.data.author}</span>
+                <time>{formatDate(post.data.date)}</time>
               </div>
-            </a>
-          </article>
-        );
-      })}
-    </div>
-
-    {/* NEWSLETTER CTA */}
-    <div class="newsletter-cta">
-      <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br>놓치지 않으려면.</h2>
-      <p class="newsletter-cta-desc">이메일을 남겨주세요.<br>제주랩스의 새로운 이야기가 찾아갑니다.</p>
-      <form
-        class="newsletter-cta-form"
-        name="newsletter"
-        method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="newsletter" />
-        <input type="hidden" name="bot-field" />
-        <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required />
-        <button type="submit">구독하기</button>
-      </form>
-    </div>
-
+            </div>
+          </a>
+        </article>
+      );
+    })}
   </div>
+
+  <div class="newsletter-cta">
+    <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br>놓치지 않으려면.</h2>
+    <p class="newsletter-cta-desc">이메일을 남겨주세요.<br>제주랩스의 새로운 이야기가 찾아갑니다.</p>
+    <form
+      class="newsletter-cta-form"
+      name="newsletter"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="newsletter" />
+      <input type="hidden" name="bot-field" />
+      <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required />
+      <button type="submit">구독하기</button>
+    </form>
+  </div>
+
 </BaseLayout>
