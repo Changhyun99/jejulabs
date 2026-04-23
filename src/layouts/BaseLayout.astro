@@ -4,9 +4,23 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: string;
 }
 
-const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그것을 재해석합니다' } = Astro.props;
+const {
+  title,
+  description = '제주랩스 — 제주 감귤 부산물로 만든 클린 스킨케어 브랜드. 본질을 탐구하고, 그것을 재해석합니다.',
+  keywords = '제주랩스, jejulabs, 제주 화장품, 제주 클린뷰티, 감귤 스킨케어, 제주 감귤, 비건 화장품, 제주 브랜드',
+  ogImage = '/images/brand/og-brand.jpg',
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = 'https://jejulabs.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const pageTitle = title === 'Home' ? '제주랩스 | JEJULABS MAGAZINE' : `${title} | 제주랩스 JEJULABS`;
 ---
 
 <!DOCTYPE html>
@@ -15,9 +29,43 @@ const { title, description = 'JEJULABS MAGAZINE — 본질을 탐구하고, 그�
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <meta name="robots" content="index, follow" />
   <meta name="naver-site-verification" content="785dc465cf0046bfaa176ae82282f404a4a5f417" />
-  <title>{title} | JEJULABS MAGAZINE</title>
+
+  <title>{pageTitle}</title>
+  <link rel="canonical" href={canonicalUrl} />
   <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:site_name" content="제주랩스 JEJULABS" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- JSON-LD 구조화 데이터 -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "제주랩스",
+    "alternateName": "JEJULABS",
+    "url": siteUrl,
+    "logo": `${siteUrl}/images/jejulabs-logo.png`,
+    "description": "제주 감귤 부산물로 만든 클린 스킨케어 브랜드",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "제주특별자치도",
+      "addressCountry": "KR"
+    },
+    "sameAs": [
+      "https://instagram.com/jejulabs_official",
+      "https://smartstore.naver.com/jejulabs"
+    ]
+  })} />
+
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
