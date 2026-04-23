@@ -2,9 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog'))
+const PAGE_SIZE = 9;
+
+const allPosts = (await getCollection('blog'))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const posts = allPosts.slice(0, PAGE_SIZE);
+const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
 
 const categoryNames: Record<string, string> = {
   'people': 'People',
@@ -16,6 +21,10 @@ const categoryNames: Record<string, string> = {
 
 function formatDate(date: Date) {
   return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
+function pageUrl(page: number) {
+  return page === 1 ? '/' : `/page/${page}`;
 }
 ---
 
@@ -47,6 +56,18 @@ function formatDate(date: Date) {
       );
     })}
   </div>
+
+  {totalPages > 1 && (
+    <nav class="pagination" aria-label="페이지 탐색">
+      <span class="pagination-btn is-disabled">← 이전</span>
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+        <a href={pageUrl(page)} class={`pagination-btn ${page === 1 ? 'is-active' : ''}`}>
+          {page}
+        </a>
+      ))}
+      <a href={pageUrl(2)} class="pagination-btn">다음 →</a>
+    </nav>
+  )}
 
   <div class="newsletter-cta">
     <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br>놓치지 않으려면.</h2>

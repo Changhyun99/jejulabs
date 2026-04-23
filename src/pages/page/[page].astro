@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const PAGE_SIZE = 9;
+
+export async function getStaticPaths() {
+  const PAGE_SIZE = 9;
+
+  const allPosts = (await getCollection('blog'))
+    .filter((post: CollectionEntry<'blog'>) => !post.data.draft)
+    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+      b.data.date.valueOf() - a.data.date.valueOf()
+    );
+
+  const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
+
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => {
+    const page = i + 2;
+    return {
+      params: { page: String(page) },
+      props: {
+        posts: allPosts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+        currentPage: page,
+        totalPages,
+      },
+    };
+  });
+}
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  currentPage: number;
+  totalPages: number;
+}
+
+const { posts, currentPage, totalPages } = Astro.props;
+
+const categoryNames: Record<string, string> = {
+  'people': 'People',
+  'discovery': 'Discovery',
+  'making': 'Making',
+  'jeju': 'Jeju',
+  'notice': 'Notice',
+};
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
+function pageUrl(page: number) {
+  return page === 1 ? '/' : `/page/${page}`;
+}
+---
+
+<BaseLayout title={`매거진 — ${currentPage}페이지`}>
+
+  <div class="post-grid">
+    {posts.map((post, index) => {
+      const pos = index % 6;
+      return (
+        <article class={`grid-post pos-${pos}`}>
+          <a href={`/blog/${post.id}`}>
+            {post.data.thumbnail
+              ? <img src={post.data.thumbnail} alt={post.data.title} class="grid-post-img" />
+              : <div class="grid-post-placeholder"></div>
+            }
+            <div class="grid-post-overlay">
+              <span class="grid-post-category">
+                {categoryNames[post.data.category] || post.data.category}
+              </span>
+              <h2 class="grid-post-title">{post.data.title}</h2>
+              <p class="grid-post-desc">{post.data.description}</p>
+              <div class="grid-post-meta">
+                <span class="grid-post-author">{post.data.author}</span>
+                <time>{formatDate(post.data.date)}</time>
+              </div>
+            </div>
+          </a>
+        </article>
+      );
+    })}
+  </div>
+
+  <nav class="pagination" aria-label="페이지 탐색">
+    {currentPage > 1
+      ? <a href={pageUrl(currentPage - 1)} class="pagination-btn">← 이전</a>
+      : <span class="pagination-btn is-disabled">← 이전</span>
+    }
+
+    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+      <a
+        href={pageUrl(page)}
+        class={`pagination-btn ${page === currentPage ? 'is-active' : ''}`}
+      >
+        {page}
+      </a>
+    ))}
+
+    {currentPage < totalPages
+      ? <a href={pageUrl(currentPage + 1)} class="pagination-btn">다음 →</a>
+      : <span class="pagination-btn is-disabled">다음 →</span>
+    }
+  </nav>
+
+</BaseLayout>

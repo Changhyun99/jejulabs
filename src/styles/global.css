@@ -377,6 +377,44 @@ body {
 .product-discover-cta:hover { background: var(--jl-terra-dark); }
 
 /* ================================================
+   PAGINATION
+   ================================================ */
+.pagination {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 6px;
+  padding: 48px 24px;
+}
+
+.pagination-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 40px; height: 40px; padding: 0 14px;
+  font-family: var(--jl-font); font-size: 0.85rem; font-weight: 600;
+  color: var(--jl-text-primary);
+  background: var(--jl-bg-card);
+  border: 1.5px solid var(--jl-border);
+  border-radius: var(--jl-radius-md);
+  transition: var(--jl-transition);
+  text-decoration: none;
+}
+
+.pagination-btn:hover {
+  border-color: var(--jl-terra);
+  color: var(--jl-terra);
+}
+
+.pagination-btn.is-active {
+  background: var(--jl-terra);
+  color: #FFFFFF;
+  border-color: var(--jl-terra);
+}
+
+.pagination-btn.is-disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ================================================
    NEWSLETTER CTA
    ================================================ */
 .newsletter-cta {
