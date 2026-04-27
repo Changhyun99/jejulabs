@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Editors" description="JEJULABS 매거진을 만드는 사람들">
+  <div class="editors-page">
+    <section class="editors-hero">
+      <span class="editors-tag">EDITORS</span>
+      <h1 class="editors-heading">이 매거진을 만드는 사람들</h1>
+      <p class="editors-sub">제주에서 발견한 이야기를, 각자의 시선으로 전합니다.</p>
+    </section>
+
+    <section class="editors-list">
+      {/* ===== 윤찰나 ===== */}
+      <article class="editor-card">
+        <div class="editor-visual">
+          <div class="editor-initial">윤</div>
+        </div>
+        <div class="editor-info">
+          <h2 class="editor-name">윤찰나</h2>
+          <p class="editor-quote">
+            "순간을 온전히 느낄 때 살아있음을 느낍니다.<br/>
+            그 찰나의 명료함으로 제주의 이야기를 전합니다."
+          </p>
+          <p class="editor-desc">
+            감각적인 순간을 포착하고, 브랜드의 언어로 옮기는 사람.
+            제주의 바람과 향, 질감을 글 속에 담습니다.
+          </p>
+        </div>
+      </article>
+
+      {/* ===== 이늘보 ===== */}
+      <article class="editor-card">
+        <div class="editor-visual">
+          <div class="editor-initial">이</div>
+        </div>
+        <div class="editor-info">
+          <h2 class="editor-name">이늘보</h2>
+          <p class="editor-quote">
+            "본질을 탐구하는 일은, 결국 나를 이해하는 일이었습니다.<br/>
+            제주에서 발견한 것들을 나눕니다."
+          </p>
+          <p class="editor-desc">
+            본질에 대한 탐구로 감귤박에서 가능성을 발견한 사람.
+            당연한 것들 속에 숨은 가치를 찾아 이야기로 만듭니다.
+          </p>
+        </div>
+      </article>
+    </section>
+  </div>
+</BaseLayout>
