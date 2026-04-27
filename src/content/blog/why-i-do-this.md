@@ -4,7 +4,7 @@ description: "답이 나오지 않는 질문을 붙잡고, 남들의 결과만 �
 date: 2026-03-17
 category: people
 thumbnail: "/images/blog/why-i-do-this.jpg"
-author: "이늘보"
+author: "이창현"
 draft: false
 ---
 

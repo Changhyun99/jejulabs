@@ -4,7 +4,7 @@ description: "생일 선물로 받은 감귤 한 박스에서 시작된 질문. 
 date: 2026-04-05
 category: "discovery"
 thumbnail: "/images/blog/citrus-waste-value.jpg"
-author: "이늘보"
+author: "이창현"
 draft: false
 ---
 

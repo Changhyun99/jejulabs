@@ -4,7 +4,7 @@ description: "감귤박에서 시작된 질문이 바다로, 공간으로, 사�
 date: 2026-04-06
 category: "discovery"
 thumbnail: "/images/blog/what-jejulabs-does.jpg"
-author: "이늘보"
+author: "이창현"
 draft: false
 ---
 
