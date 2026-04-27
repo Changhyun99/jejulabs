@@ -31,7 +31,7 @@ const allPosts = (await getCollection('blog'))
 const related = allPosts.slice(0, 2);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} ogImage={post.data.thumbnail} ogType="article">
 
   <!-- ★ 스플릿 히어로: 왼쪽 55% 썸네일 + 오른쪽 45% 정보 -->
   <div class="article-hero-split">
