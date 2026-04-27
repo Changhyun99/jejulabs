@@ -32,31 +32,97 @@ const related = allPosts.slice(0, 2);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="article-detail">
-    <span class="article-category">
-      {categoryNames[post.data.category] || post.data.category}
-    </span>
-    <h1 class="article-title">{post.data.title}</h1>
-    <div class="article-meta">
-      <span class="author">{post.data.author}</span>
-      <time>{formatDate(post.data.date)}</time>
+
+  <!-- ★ 스플릿 히어로: 왼쪽 55% 썸네일 + 오른쪽 45% 정보 -->
+  <div class="article-hero-split">
+    <div class="article-hero-image">
+      {post.data.thumbnail ? (
+        <img src={post.data.thumbnail} alt={post.data.title} />
+      ) : (
+        <div class="article-hero-placeholder"></div>
+      )}
     </div>
+    <div class="article-hero-info">
+      <span class="article-hero-category">
+        {categoryNames[post.data.category] || post.data.category}
+      </span>
+      <h1 class="article-hero-title">{post.data.title}</h1>
+      {post.data.description && (
+        <p class="article-hero-desc">{post.data.description}</p>
+      )}
+      <div class="article-hero-meta">
+        <time>{formatDate(post.data.date)}</time>
+      </div>
+      <div class="article-hero-author">
+        <div class="article-hero-author-avatar">
+          {post.data.author?.charAt(0)}
+        </div>
+        <span class="article-hero-author-name">{post.data.author}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ★ 본문 -->
+  <article class="article-detail">
     <div class="article-body">
       <Content />
     </div>
   </article>
 
+  <!-- ★ 에디터 노트 (마지막 ## 에디터 섹션을 시각적으로 분리) -->
+  {post.data.author && (
+    <div class="editor-note-divider">
+      <div class="editor-note-profile">
+        <div class="editor-note-avatar">
+          {post.data.author?.charAt(0)}
+        </div>
+        <div class="editor-note-info">
+          <span class="editor-note-label">Written by</span>
+          <span class="editor-note-name">{post.data.author}</span>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- ★ 관련 글 (카테고리 태그 + 썸네일 포함) -->
   {related.length > 0 && (
     <div class="related-articles">
       <h3>다른 이야기도 읽어보세요</h3>
       <div class="related-articles-grid">
         {related.map(r => (
           <a href={`/blog/${r.id}`} class="related-article-item">
-            <h4>{r.data.title}</h4>
-            <p>{formatDate(r.data.date)}</p>
+            {r.data.thumbnail ? (
+              <div class="related-article-thumb">
+                <img src={r.data.thumbnail} alt={r.data.title} />
+              </div>
+            ) : (
+              <div class="related-article-thumb-placeholder"></div>
+            )}
+            <div class="related-article-text">
+              <span class="related-article-category">
+                {categoryNames[r.data.category] || r.data.category}
+              </span>
+              <h4>{r.data.title}</h4>
+              <p>{formatDate(r.data.date)}</p>
+            </div>
           </a>
         ))}
       </div>
     </div>
   )}
+
+  <script is:inline>
+    (function () {
+      const hero = document.querySelector('.article-hero-split');
+      if (!hero) return;
+      const heroBottom = hero.offsetTop + hero.offsetHeight;
+      function onScroll() {
+        const scrolled = window.scrollY;
+        /* heroBottom 시점에 opacity 0 도달 */
+        const ratio = Math.min(scrolled / (heroBottom * 0.75), 1);
+        hero.style.opacity = String(1 - ratio);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+  </script>
 </BaseLayout>

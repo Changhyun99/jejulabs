@@ -18,58 +18,74 @@ function formatDate(date: Date) {
   return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ');
 }
 
-// 3개씩 묶어서 블록 단위로 분리
-const blocks: typeof posts[] = [];
-for (let i = 0; i < posts.length; i += 3) {
-  blocks.push(posts.slice(i, i + 3));
-}
+const heroPost = posts[0];
+const gridPosts = posts.slice(1, 7);
+const hasMore = posts.length > 7;
 ---
 
 <BaseLayout title="Home">
   <div class="main-content">
-    <div class="editorial-grid">
-      {blocks.map((block, blockIndex) => {
-        const isEven = blockIndex % 2 === 0;
-        // even 블록: 왼쪽 tall (0=tall, 1=short-top, 2=short-bottom)
-        // odd 블록: 오른쪽 tall (0=short-top, 1=short-bottom, 2=tall)
-        return (
-          <div class={`editorial-block ${isEven ? 'tall-left' : 'tall-right'}`}>
-            {block.map((post, i) => {
-              let posClass = '';
-              if (isEven) {
-                posClass = i === 0 ? 'cell-tall' : i === 1 ? 'cell-short-top' : 'cell-short-bottom';
-              } else {
-                posClass = i === 0 ? 'cell-short-top' : i === 1 ? 'cell-short-bottom' : 'cell-tall';
-              }
-              return (
-                <article class={`grid-post ${posClass}`}>
-                  <a href={`/blog/${post.id}`}>
-                    {post.data.thumbnail ? (
-                      <img class="grid-post-img" src={post.data.thumbnail} alt={post.data.title} />
-                    ) : (
-                      <div class="grid-post-placeholder" />
-                    )}
-                    <div class="grid-post-overlay">
-                      <span class="grid-post-category">
-                        {categoryNames[post.data.category] || post.data.category}
-                      </span>
-                      <h2 class="grid-post-title">{post.data.title}</h2>
-                      <p class="grid-post-desc">{post.data.description}</p>
-                      <div class="grid-post-meta">
-                        <span class="grid-post-author">{post.data.author}</span>
-                        <time>{formatDate(post.data.date)}</time>
-                      </div>
-                    </div>
-                  </a>
-                </article>
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
 
-    {/* NEWSLETTER CTA */}
+    {/* ★ ZONE 1 — 히어로: 최신 글 1개, 스플릿 레이아웃 */}
+    {heroPost && (
+      <a href={`/blog/${heroPost.id}`} class="home-hero">
+        <div class="home-hero-image">
+          {heroPost.data.thumbnail ? (
+            <img src={heroPost.data.thumbnail} alt={heroPost.data.title} />
+          ) : (
+            <div class="home-hero-placeholder"></div>
+          )}
+        </div>
+        <div class="home-hero-info">
+          <span class="home-hero-category">
+            {categoryNames[heroPost.data.category] || heroPost.data.category}
+          </span>
+          <h1 class="home-hero-title">{heroPost.data.title}</h1>
+          <p class="home-hero-desc">{heroPost.data.description}</p>
+          <div class="home-hero-meta">
+            <span class="home-hero-author">{heroPost.data.author}</span>
+            <time>{formatDate(heroPost.data.date)}</time>
+          </div>
+        </div>
+      </a>
+    )}
+
+    {/* ★ ZONE 2 — 카드 그리드: 2열, 최대 6개 */}
+    {gridPosts.length > 0 && (
+      <section class="home-grid-section">
+        <div class="home-grid">
+          {gridPosts.map(post => (
+            <a href={`/blog/${post.id}`} class="home-card">
+              <div class="home-card-image">
+                {post.data.thumbnail ? (
+                  <img src={post.data.thumbnail} alt={post.data.title} />
+                ) : (
+                  <div class="home-card-placeholder"></div>
+                )}
+              </div>
+              <div class="home-card-body">
+                <span class="home-card-category">
+                  {categoryNames[post.data.category] || post.data.category}
+                </span>
+                <h2 class="home-card-title">{post.data.title}</h2>
+                <p class="home-card-desc">{post.data.description}</p>
+                <div class="home-card-meta">
+                  <span class="home-card-author">{post.data.author}</span>
+                  <time>{formatDate(post.data.date)}</time>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+        {hasMore && (
+          <div class="home-grid-more">
+            <a href="/blog" class="home-grid-more-btn">더 많은 이야기 →</a>
+          </div>
+        )}
+      </section>
+    )}
+
+    {/* ★ ZONE 3 — 뉴스레터 */}
     <div class="newsletter-cta">
       <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br/>놓치지 않으려면.</h2>
       <p class="newsletter-cta-desc">이메일을 남겨주세요.<br/>제주랩스의 새로운 이야기가 찾아갑니다.</p>
@@ -86,5 +102,6 @@ for (let i = 0; i < posts.length; i += 3) {
         <button type="submit">구독하기</button>
       </form>
     </div>
+
   </div>
 </BaseLayout>
