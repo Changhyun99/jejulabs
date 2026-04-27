@@ -111,4 +111,18 @@ const related = allPosts.slice(0, 2);
     </div>
   )}
 
+  <script is:inline>
+    (function () {
+      const hero = document.querySelector('.article-hero-split');
+      if (!hero) return;
+      const heroBottom = hero.offsetTop + hero.offsetHeight;
+      function onScroll() {
+        const scrolled = window.scrollY;
+        /* heroBottom 시점에 opacity 0 도달 */
+        const ratio = Math.min(scrolled / (heroBottom * 0.75), 1);
+        hero.style.opacity = String(1 - ratio);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+  </script>
 </BaseLayout>
