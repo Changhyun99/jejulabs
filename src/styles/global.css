@@ -628,7 +628,6 @@ body {
   text-align: center; padding: var(--jl-space-4xl) var(--jl-space-lg);
   color: var(--jl-text-muted); font-size: 1rem;
 }
-
 .category-post-list {
   padding-bottom: 120px;
 }
