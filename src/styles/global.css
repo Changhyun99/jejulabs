@@ -1313,6 +1313,9 @@ body {
     padding: 0 var(--jl-space-md);
     gap: var(--jl-space-md);
   }
+  .category-post-list {
+    padding-bottom: 120px;
+  }
   .post-item-body { padding: var(--jl-space-lg); }
   .post-item-title { font-size: 1.1rem; }
 
