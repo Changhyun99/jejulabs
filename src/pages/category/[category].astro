@@ -48,7 +48,7 @@ function formatDate(date: Date) {
       <p>아직 이 카테고리에 게시된 글이 없습니다.</p>
     </div>
   ) : (
-    <div class="post-list">
+    <div class="post-list category-post-list">
       {posts.map((post, index) => {
         const isOrange = index % 2 === 1;
         return (
