@@ -629,6 +629,11 @@ body {
   color: var(--jl-text-muted); font-size: 1rem;
 }
 
+.category-post-list {
+  padding-bottom: 120px;
+}
+
+
 /* ================================================
    PRODUCT PAGE
    ================================================ */
