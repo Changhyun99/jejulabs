@@ -5,7 +5,7 @@ description: 17세에 자퇴를 하고, 자기 자신을 찾기 위해 여행을
 date: 2026-04-27
 category: people
 thumbnail: /images/blog/yesss-yerim.jpg
-author: 윤찰나
+author: 윤성현
 draft: false
 ---
 ## PART 1. 요리의 삶이 지칠 때, 과자가 찾아왔다
