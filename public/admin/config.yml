@@ -28,11 +28,12 @@ collections:
         label: 카테고리
         widget: select
         options:
-          - { label: "People", value: "people" }
-          - { label: "Discovery", value: "discovery" }
-          - { label: "Making", value: "making" }
-          - { label: "Jeju", value: "jeju" }
-          - { label: "Notice", value: "notice" }
+          - { label: "사람", value: "people" }
+          - { label: "사물", value: "making" }
+          - { label: "문화", value: "jeju" }
+          - { label: "재해석", value: "discovery" }
+          - { label: "공지", value: "notice" }
+
       - name: thumbnail
         label: 썸네일 이미지
         widget: image

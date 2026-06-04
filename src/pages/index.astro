@@ -7,26 +7,43 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const categoryNames: Record<string, string> = {
-  'people': 'People',
-  'discovery': 'Discovery',
-  'making': 'Making',
-  'jeju': 'Jeju',
-  'notice': 'Notice',
+  'people': '사람',
+  'making': '사물',
+  'jeju': '문화',
+  'discovery': '재해석',
+  'notice': '공지',
 };
 
+// 카테고리별 설명 문구
+const categoryDescriptions: Record<string, string> = {
+  'making': '우리가 매일 스치는 물건들에는 이유가 있다. 모양에도, 향에도, 질감에도. 그 이유를 들여다보는 일은, 세상을 다시 보는 일이다.',
+  'people': '어떤 사람이 그 자리에 있는 데는 이유가 있다. 우리는 무엇을 하는지가 아니라, 왜 그것을 하는지를 묻는다.',
+  'jeju': '오래 남은 것에는 오래 남은 이유가 있다. 사라져가는 것에도 사라지는 이유가 있다. 우리는 그 결을 읽는다.',
+  'discovery': '발견은 시작이지 끝이 아니다. 우리가 본 것들을, 다음의 무언가로 옮긴다.',
+};
+
+// 메인 섹션에 노출할 카테고리 순서: 사람 → 사물 → 문화 → 재해석
+const sectionOrder = ['people', 'making', 'jeju', 'discovery'];
+
 function formatDate(date: Date) {
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, ' ');
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
 
 const heroPost = posts[0];
-const gridPosts = posts.slice(1, 7);
-const hasMore = posts.length > 7;
+
+// 카테고리별로 글 묶기 (히어로로 쓰인 글도 카테고리 줄에는 그대로 포함)
+const sections = sectionOrder.map(cat => ({
+  key: cat,
+  name: categoryNames[cat] || cat,
+  description: categoryDescriptions[cat] || '',
+  posts: posts.filter(p => p.data.category === cat).slice(0, 4),
+})).filter(section => section.posts.length > 0);
 ---
 
 <BaseLayout title="Home">
   <div class="main-content">
 
-    {/* ★ ZONE 1 — 히어로: 최신 글 1개, 스플릿 레이아웃 */}
+    {/* ★ ZONE 1 — 히어로: 최신 글 1개, 그대로 유지 */}
     {heroPost && (
       <a href={`/blog/${heroPost.id}`} class="home-hero">
         <div class="home-hero-image">
@@ -50,42 +67,34 @@ const hasMore = posts.length > 7;
       </a>
     )}
 
-    {/* ★ ZONE 2 — 카드 그리드: 2열, 최대 6개 */}
-    {gridPosts.length > 0 && (
-      <section class="home-grid-section">
-        <div class="home-grid">
-          {gridPosts.map(post => (
-            <a href={`/blog/${post.id}`} class="home-card">
-              <div class="home-card-image">
+    {/* ★ ZONE 2 — 카테고리별 가로 한 줄 나열 */}
+    {sections.map(section => (
+      <section class="home-row-section">
+        <div class="home-row-head">
+          <h2 class="home-row-title">{section.name}</h2>
+          <a href={`/category/${section.key}`} class="home-row-more">전체 보기 →</a>
+          {section.description && (
+            <p class="home-row-desc">{section.description}</p>
+          )}
+        </div>
+        <div class="home-row">
+          {section.posts.map(post => (
+            <a href={`/blog/${post.id}`} class="home-row-card">
+              <div class="home-row-card-image">
                 {post.data.thumbnail ? (
                   <img src={post.data.thumbnail} alt={post.data.title} />
                 ) : (
-                  <div class="home-card-placeholder"></div>
+                  <div class="home-row-card-placeholder"></div>
                 )}
               </div>
-              <div class="home-card-body">
-                <span class="home-card-category">
-                  {categoryNames[post.data.category] || post.data.category}
-                </span>
-                <h2 class="home-card-title">{post.data.title}</h2>
-                <p class="home-card-desc">{post.data.description}</p>
-                <div class="home-card-meta">
-                  <span class="home-card-author">{post.data.author}</span>
-                  <time>{formatDate(post.data.date)}</time>
-                </div>
-              </div>
+              <h3 class="home-row-card-title">{post.data.title}</h3>
             </a>
           ))}
         </div>
-        {hasMore && (
-          <div class="home-grid-more">
-            <a href="/blog" class="home-grid-more-btn">더 많은 이야기 →</a>
-          </div>
-        )}
       </section>
-    )}
+    ))}
 
-    {/* ★ ZONE 3 — 뉴스레터 */}
+    {/* ★ ZONE 3 — 뉴스레터 (그대로 유지) */}
     <div class="newsletter-cta">
       <h2 class="newsletter-cta-title">제주에서 시작되는 이야기,<br/>놓치지 않으려면.</h2>
       <p class="newsletter-cta-desc">이메일을 남겨주세요.<br/>제주랩스의 새로운 이야기가 찾아갑니다.</p>
