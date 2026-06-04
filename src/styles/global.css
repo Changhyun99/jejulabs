@@ -501,6 +501,7 @@ body {
     gap: var(--jl-space-md);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--jl-space-md);
     -webkit-overflow-scrolling: touch;
     padding: 0 var(--jl-space-md) 4px;
     scrollbar-width: none;

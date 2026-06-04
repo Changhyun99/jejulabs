@@ -10,19 +10,19 @@ export function getStaticPaths() {
 }
 
 const categoryConfig: Record<string, { name: string; description: string }> = {
-  'people': { name: 'People', description: '제주에서 자기만의 방식으로 무언가를 만드는 사람들.' },
-  'discovery': { name: 'Discovery', description: '당연한 줄 알았던 것의 진짜 모습. 제주를 한 발짝 더 들여다봅니다.' },
-  'making': { name: 'Making', description: '우리가 무엇을, 왜, 어떻게 만들고 있는가.' },
-  'jeju': { name: 'Jeju', description: '바람, 돌, 바다, 계절. 제주가 가진 것들.' },
-  'notice': { name: 'Notice', description: '공지사항과 소식을 전합니다.' },
+  'people':    { name: '사람',   description: '제주에서 자기만의 방식으로 무언가를 만드는 사람들.' },
+  'making':    { name: '사물',   description: '우리가 무엇을, 왜, 어떻게 만들고 있는가.' },
+  'jeju':      { name: '문화',   description: '바람, 돌, 바다, 계절. 제주가 가진 것들.' },
+  'discovery': { name: '재해석', description: '당연한 줄 알았던 것의 진짜 모습. 제주를 한 발짝 더 들여다봅니다.' },
+  'notice':    { name: '공지',   description: '공지사항과 소식을 전합니다.' },
 };
 
 const categoryNames: Record<string, string> = {
-  'people': 'People',
-  'discovery': 'Discovery',
-  'making': 'Making',
-  'jeju': 'Jeju',
-  'notice': 'Notice',
+  'people': '사람',
+  'making': '사물',
+  'jeju': '문화',
+  'discovery': '재해석',
+  'notice': '공지',
 };
 
 const { category } = Astro.params;
