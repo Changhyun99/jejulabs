@@ -1,7 +1,6 @@
 ---
-title: 소외되지 않는 하루를 굽다 — 예에쓰 예림님 인터뷰
-description: 17세에 자퇴를 하고, 자기 자신을 찾기 위해 여행을 떠난 소녀. 인도를 거쳐 요리사가 된 후에는 제주도로 돌아와
-  버려지는 콩으로 과자를 굽기까지의 여정을 담았습니다. 비건과자집 "예에쓰"의 이예림 대표님의 이야기. 지금 시작합니다.
+title: "소외되지 않는 하루를 굽다 "
+description: 예에쓰 이예림 대표님
 date: 2026-04-27
 category: people
 thumbnail: /images/blog/yesss-yerim.jpg
