@@ -2,7 +2,7 @@
 title: "남은 것들의 가치는 무엇인가"
 description: "생일 선물로 받은 감귤 한 박스에서 시작된 질문. 매년 버려지는 5만 톤의 감귤 부산물에는 어떤 가능성이 숨어 있을까."
 date: 2026-04-05
-category: "making"
+category: "object"
 thumbnail: "/images/blog/citrus-waste-value.jpg"
 author: "이창현"
 draft: false

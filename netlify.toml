@@ -2,6 +2,32 @@
   command = "npm run build"
   publish = "dist"
 
+# 카테고리 slug 변경(한글 뜻에 맞춤)에 따른 구 URL 301 리다이렉트
+[[redirects]]
+  from = "/category/making"
+  to = "/category/object"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category/jeju"
+  to = "/category/culture"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category/discovery"
+  to = "/category/reinterpret"
+  status = 301
+  force = true
+
+# 한글 slug 글을 영문 URL로 변경한 데 따른 구 URL 301 리다이렉트
+[[redirects]]
+  from = "/blog/꿈을-멈춘-섬에서-가장-나다운-공간을-짓다"
+  to = "/blog/monthly-jeju"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/admin/*"
   [headers.values]

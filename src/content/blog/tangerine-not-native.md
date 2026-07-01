@@ -2,7 +2,7 @@
 title: "감귤이요? 제주 토종 아닌데요."
 description: "제주에서 일하면서, 감귤이 당연히 제주 토종인 줄 알았습니다. 찾아봤더니요. 아닙니다."
 date: 2026-05-08
-category: "making"
+category: "object"
 thumbnail: "/images/blog/tangerine-not-native.jpg"
 author: "이창현"
 draft: false

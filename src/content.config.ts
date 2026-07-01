@@ -7,7 +7,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.date(),
-    category: z.enum(['people', 'discovery', 'making', 'jeju', 'notice']),
+    category: z.enum(['people', 'reinterpret', 'object', 'culture', 'notice']),
     thumbnail: z.string().optional(),
     author: z.string().default('JEJULABS'),
     draft: z.boolean().default(false),

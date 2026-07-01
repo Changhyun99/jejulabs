@@ -2,7 +2,7 @@
 title: "제주랩스가 하려는 일"
 description: "감귤박에서 시작된 질문이 바다로, 공간으로, 사람에게로 번졌다. 스킨케어는 첫 번째 챕터였을 뿐이다."
 date: 2026-04-06
-category: "discovery"
+category: "reinterpret"
 thumbnail: "/images/blog/what-jejulabs-does.jpg"
 author: "이창현"
 draft: false

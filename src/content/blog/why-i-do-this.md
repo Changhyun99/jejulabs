@@ -2,7 +2,7 @@
 title: "나는 왜 이 일을 하는가"
 description: "답이 나오지 않는 질문을 붙잡고, 남들의 결과만 바라보며 조급해하던 시간. 질문을 바꾸자 답이 보이기 시작했습니다."
 date: 2026-03-17
-category: discovery
+category: reinterpret
 thumbnail: "/images/blog/why-i-do-this.jpg"
 author: "이창현"
 draft: false
