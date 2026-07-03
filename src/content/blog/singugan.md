@@ -1,10 +1,11 @@
 ---
-title: "신구간, 당신에게도 신구간이 있나요?"
-description: "제주 사람들이 한겨울 일주일에 다 함께 짐을 싸는 이유. 미신의 껍질을 벗기면, 그 안에는 반복을 끊고 다시 시작하는 오래된 기술이 있었습니다."
+title: 신구간, 당신에게도 '비움의 시간'이 있나요?
+description: 제주 사람들이 한겨울 일주일에 다 함께 짐을 싸는 이유. 미신의 껍질을 벗기면, 그 안에는 반복을 끊고 다시 시작하는
+  오래된 기술이 있었습니다.
 date: 2026-07-01
 category: culture
 thumbnail: /images/blog/singugan.jpg
-author: "이창현"
+author: 이창현
 draft: false
 ---
 
