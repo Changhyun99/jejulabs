@@ -8,7 +8,7 @@ description: >-
 
   그런데 이 단어의 뿌리를 따라가 보면, 뜻밖의 말이 나온다. 사랑이다.
 date: 2026-08-11
-category: jeju
+category: culture
 thumbnail: /images/blog/kakaotalk_photo_2026-08-11-21-30-54.jpg
 author: 이창현
 draft: false
