@@ -29,9 +29,9 @@ collections:
         widget: select
         options:
           - { label: "사람", value: "people" }
-          - { label: "사물", value: "making" }
-          - { label: "문화", value: "jeju" }
-          - { label: "재해석", value: "discovery" }
+          - { label: "사물", value: "object" }
+          - { label: "문화", value: "culture" }
+          - { label: "재해석", value: "reinterpret" }
           - { label: "공지", value: "notice" }
 
       - name: thumbnail
