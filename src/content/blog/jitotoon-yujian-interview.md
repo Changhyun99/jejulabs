@@ -1,5 +1,6 @@
 ---
 title: 낙서로 시작된 마음이 사람에게 닿기까지
+slug: jitotoon-yujian-interview
 description: 지토툰 유지안 작가님
 date: 2026-07-07
 category: people

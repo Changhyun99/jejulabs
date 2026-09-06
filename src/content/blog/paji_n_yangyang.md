@@ -1,5 +1,6 @@
 ---
 title: 버려진 종이에서 피어난 불꽃
+slug: paji_n_yangyang
 description: 파지앤양양 김봄이 대표님
 date: 2026-06-08
 category: people

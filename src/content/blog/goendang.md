@@ -1,5 +1,6 @@
 ---
 title: "괸당: 사랑을 표현하는 제주만의 방식"
+slug: goendang
 description: "텃세와 배타성의 상징처럼 여겨지는 '괸당'. 그 말의 뿌리를 따라가면, 뜻밖에도 '사랑'이 나온다."
 date: 2026-08-11
 category: culture

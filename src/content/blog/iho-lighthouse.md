@@ -1,5 +1,6 @@
 ---
 title: 하얀 말과 빨간 말은, 왜 나란히 서 있을까
+slug: iho-lighthouse
 description: 이호테우 목마등대에 대하여
 date: 2026-09-05
 category: culture

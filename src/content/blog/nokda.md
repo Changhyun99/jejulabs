@@ -1,5 +1,6 @@
 ---
 title: 흔적 없이 사라지는 숭고함에 대하여
+slug: nokda
 description: 녹다 김보미 대표님
 date: 2026-07-28
 category: people

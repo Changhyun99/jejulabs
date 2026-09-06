@@ -1,5 +1,6 @@
 ---
 title: 꿈을 멈춘 섬에서, 가장 나다운 공간을 짓다
+slug: monthly-jeju
 description: 먼슬리 제주 정순덕 대표님
 date: 2026-06-22
 category: people

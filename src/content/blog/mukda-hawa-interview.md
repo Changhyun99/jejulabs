@@ -1,5 +1,6 @@
 ---
 title: 할까 말까가 아니라
+slug: mukda-hawa-interview
 description: 숙소 묵다 · 카페 하와 김민영 대표님
 date: 2026-08-21
 category: people

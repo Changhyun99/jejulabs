@@ -1,5 +1,6 @@
 ---
 title: "소외되지 않는 하루를 굽다 "
+slug: yesss-yerim-interview
 description: 예에쓰 이예림 대표님
 date: 2026-04-27
 category: people

@@ -14,9 +14,14 @@ collections:
     folder: src/content/blog
     create: true
     delete: true
-    slug: "{{slug}}"
+    slug: "{{fields.slug}}"
     fields:
       - { name: title, label: 제목, widget: string }
+      - name: slug
+        label: "URL 주소 (영문 소문자, 띄어쓰기는 - 로)"
+        hint: "예: jeju-yeonse → jejulabs.com/blog/jeju-yeonse · 발행 후에는 바꾸지 마세요"
+        widget: string
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', '영문 소문자, 숫자, 하이픈(-)만 쓸 수 있어요']
       - { name: description, label: 요약 (카드에 표시됨), widget: text }
       - name: date
         label: 발행일
